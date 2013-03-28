@@ -1,0 +1,13 @@
+include ../setup/tile/tile
+
+.buttons.group
+  style
+    .buttons ul {
+      list-style: none;
+      padding: 0;
+    }
+
+  ul
+    each button, i in buttons
+      li
+        a(class=button, href="#") Button #{i}

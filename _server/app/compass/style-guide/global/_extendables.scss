@@ -1,0 +1,16 @@
+////////////////////////
+// Extendables Partials
+//
+// All of your extendable classes, ids, and placeholder extendables
+//   should go in this file.
+////////////////////////
+
+%monospace {
+  font-family: "source-code-pro", monospace;
+  font-weight: 300;
+
+  strong &,
+  strong {
+    font-weight: 500;
+  }
+}

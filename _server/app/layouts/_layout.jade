@@ -1,0 +1,41 @@
+include ../setup/client
+include ../setup/sections
+include ../setup/scripts
+include ../setup/webfonts
+include ../setup/colors/colors
+
+include _header
+include _nav
+include _webfonts
+
+doctype 5
+//if lt IE9
+  <html class="no-js lte-ie8">
+//[if gte IE9]><!
+html.no-js(lang='#{language}')
+  //<![endif]
+  head
+    title= 'pageTitle'
+    link(rel="stylesheet", href="/styles/app.css", type="text/css")
+    link(rel="stylesheet", href="/styles/main.css", type="text/css")
+    block stylesheets
+
+    - if (typekitID)
+      mixin webfonts(typekitID, 'typekit')
+    - if (googleFonts)
+      mixin webfonts(googleFonts, 'google')
+  body
+    #prototype-header(class='page-wrapper')
+      div(class='content-wrapper')
+        block header
+    #nav(class='page-wrapper')
+      div(class='content-wrapper')
+        mixin nav
+        block nav
+    #main(class='page-wrapper')
+      div(class='content-wrapper')
+        block content
+    #footer(class='page-wrapper')
+      div(class='content-wrapper')
+        block footer
+

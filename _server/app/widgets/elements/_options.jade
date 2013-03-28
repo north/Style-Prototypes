@@ -1,0 +1,4 @@
+mixin options(type, options)
+  each option in options
+    input(type=type, name="#{type}-input", value=option, id="#{option}-#{type}")
+    label(for="#{option}-#{type}") #{option}

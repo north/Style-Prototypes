@@ -1,0 +1,12 @@
+include ../partials/_lists
+
+mixin nav(items, navClass, ulClass)
+  - items = items || sections
+  - navClass = navClass || "main-nav"
+  - ulClass = ulClass || false
+
+  nav(class=navClass)
+    ul(class=ulClass)
+      each link, title in items
+        li
+          a(href="/#{link}", title=title) #{title}

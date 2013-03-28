@@ -1,0 +1,52 @@
+extends layouts/_layout
+
+append stylesheets
+  link(rel="stylesheet", href="/styles/tile.css", type="text/css")
+
+block header
+  mixin header("Style Tile")
+
+block content
+  include setup/tile/tile
+
+  article.text-examples
+    .headers.group
+      :markdown
+        ## This is a Header
+        ### This is a Sub Header
+
+        [This is an example of Link Text](#)
+
+    .text.group
+      :markdown
+        Nullam id dolor id nibh ultricies vehicula ut id elit. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Vestibulum id ligula porta felis euismod semper.
+
+        Maecenas faucibus mollis interdum. Vivamus sagittis [donec odio](#) lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Maecenas faucibus mollis interdum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Sed posuere consectetur est at lobortis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+
+        Donec ullamcorper nulla non metus auctor fringilla. Nullam quis risus eget urna mollis ornare vel eu leo. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod.
+
+        Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum. Curabitur blandit tempus porttitor. Nullam id dolor id nibh ultricies vehicula ut id elit. Cras mattis consectetur purus sit amet fermentum. Maecenas sed diam eget risus varius blandit sit amet non magna.
+
+
+    include widgets/_buttons
+
+  article.graphic-examples
+    .colors.group
+      h4 Possible Colors
+      ul
+        - colors = colors + 1
+        - for (var i=1; i < colors; ++i) {
+            li(class="color-#{i}")
+        - }
+
+    .images.group
+      h4 Possible Patterns
+      ul
+        each image, i in images
+          li(class="pattern-#{i + 1}")
+            img(alt="Pattern #{i + 1}", src="#{image}")
+
+    .inspiration.group
+      ul
+        each word, i in keywords
+          li(class="word-#{i}") #{word}

@@ -1,0 +1,8 @@
+.message.group
+  - var messages = ["status", "warning", "error"]
+  each message in messages
+    .messages(class='#{message}')
+      h2.element-invisible #{message} message
+      :markdown
+        This is _#{message}_ message.
+

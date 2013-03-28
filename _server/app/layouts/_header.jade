@@ -1,0 +1,15 @@
+mixin header(title)
+  header
+    hgroup#client-id
+      - if (clientLogo)
+        div.client-logo
+          img(src="#{clientLogo}", alt="#{clientName}")
+      - else
+          h1.client-name #{clientName}
+      h4.author-name #{author}
+    aside#page-id
+      h2.section-name #{title}
+      .page-info
+        p #{clientName} #{title}
+        -if (version)
+          p Version #{version}

@@ -1,0 +1,6 @@
+mixin input(type, label)
+  label(for="#{type}-#{label}") #{label}
+  - if (type != "textarea")
+    input(type=type, id="#{type}-#{label}")
+  - else
+    textarea(id="textarea-#{label}", rows="5", cols="20")

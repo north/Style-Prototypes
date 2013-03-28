@@ -1,0 +1,28 @@
+//////////////////////////////
+// Build out your Style Tile!
+//
+// Your Style Guide will cascade over
+//
+// Any styling specific to the Style Tile that you would not want in your final Style Guide should go in here.
+//////////////////////////////
+
+// Colors
+.color-1 {
+  background: nth($black, 1);
+}
+
+.color-2 {
+  background: nth($primary, 1);
+}
+
+.color-3 {
+  background: nth($secondary, 1);
+}
+
+.color-4 {
+  background: nth($tertiary, 1);
+}
+
+.color-5 {
+  background: nth($quadrary, 1);
+}

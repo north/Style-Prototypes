@@ -1,0 +1,15 @@
+mixin ul(items, ulClass, stripe)
+  - ulClass = ulClass || false
+  - stripe = stripe || false
+
+   ul(class=ulClass)
+    - if (stripe)
+      - var i = 1
+      - var stripeClass = "odd"
+      - if (i%2 == 0)
+        - stripeClass = "even"
+      - each item in items
+        li(class=stripeClass)= item
+    - else
+      - each item in items
+        li= item

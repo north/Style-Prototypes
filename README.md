@@ -1,0 +1,1 @@
+Launch icon from http://www.iconfinder.com/icondetails/15535/128/launch_rocket_icon

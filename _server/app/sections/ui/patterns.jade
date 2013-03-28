@@ -1,0 +1,17 @@
+extends ../../layouts/_layout
+
+block header
+  mixin header("UI Patterns")
+
+block content
+  article.messaging
+    h2 Messages
+    include ../../widgets/_messages
+
+  article.buttons
+    h2 Buttons
+    include ../../widgets/_buttons
+
+  article.pagers
+    h2 pagers
+    include ../../widgets/_pagers

@@ -1,0 +1,189 @@
+extends ../../layouts/_layout
+
+block header
+  mixin header("Basic Elements")
+
+block content
+  article.headers
+    header
+      h2 Headers
+    h1 Level one heading
+    h2 Level two heading
+    h3 Level three heading
+    h4 Level four heading
+    h5 Level five heading
+    h6 Level six heading
+
+  article.links
+    header
+      h2 Links
+    :markdown
+      * [Local Link](#)
+      * [External Link](http://google.com)
+      * [External Link, Encrypted](https://google.com)
+      * [Email Link](mailto:test@foo.bar)
+
+  article.lists
+    header
+      h2 List
+    .unordered.group
+      header
+        h3 Unordered List
+        :markdown
+          * Apple
+          * Banana
+          * Pear
+            * Carrot
+            * Mushroom
+              * Zuccini
+              * Squash
+          * Orange
+          * Tomato
+
+    .ordered-list.group
+      header
+        h3 Ordered List
+        :markdown
+          1. Apple
+          2. Banana
+          3. Pear
+            1. Carrot
+            2. Mushroom
+              1. Zuccini
+              2. Squash
+          4. Orange
+          5. Tomato
+
+    .mixed-list.group
+      header
+        h3 Mixed Lists
+        :markdown
+          1. Apple
+          2. Banana
+          3. Pear
+            * Carrot
+            * Mushroom
+              1. Zuccini
+              2. Squash
+          4. Orange
+          5. Tomato
+
+  article.options
+    header
+      h2 Options
+    include ../../widgets/elements/_options
+    include ../../widgets/elements/_select
+    .radios.group
+      header
+        h3 Radios
+      mixin options("radio", ["Foo", "Bar", "Baz"])
+    .checkboxes.group
+      header
+        h3 Checkboxes
+      mixin options("checkbox", ["Alpha", "Beta", "Gamma"])
+    .select.group
+      header
+        h3 Select
+      mixin select(["Fus", "Ro", "Dah"])
+
+  article.inputs
+    header
+      h2 Inputs
+    include ../../widgets/elements/_input
+    include ../../widgets/elements/_textarea
+    .input-types.group
+      header
+        h3 Input Types
+      - var types = ["Text", "Textarea", "Password", "Button", "File", "Hidden", "Image", "Datetime", "Datetime-local", "Date", "Month", "Time", "Week", "Number", "Range", "Email", "Url", "Search", "Tel", "Color", "Submit", "Reset"]
+        form
+          each type in types
+            .group(class="input-#{type.toLowerCase()}")
+              mixin input(type.toLowerCase(), type)
+
+      .group.content-editable
+        header
+          h3 Content Editable
+        div(contenteditable="true")
+          :markdown
+            ## I'm not dead!
+
+            Shut up! Well, we did do the nose. On second thoughts, let's not go there. It is a silly place. Oh, ow!
+
+            1. The swallow may fly south with the sun, and the house martin or the plover may seek warmer climes in winter, yet these are not strangers to our land.
+            2. You don't frighten us, English pig-dogs! Go and boil your bottoms, sons of a silly person! I blow my nose at you, so-called Ah-thoor Keeng, you and all your silly English K-n-n-n-n-n-n-n-niggits!
+            3. You can't expect to wield supreme power just 'cause some watery tart threw a sword at you!
+
+  article.displays
+    header
+      h2 Content Displays
+    .table.group
+      header
+        h3 Table
+      table
+        caption
+            | Table title goes here
+          thead
+            tr
+              th Mauris
+              th Tempor
+              th Praesent lacus nulla
+              th Quis
+          tbody
+            tr.odd
+              td Mauris
+              td 23.000
+              td Suspendisse viverra
+              td Yes
+            tr.even
+              td Trupis
+              td 1.000
+              td Placerat tortor aesent semper
+              td No
+            tr.odd
+              td Sagittis
+              td 122.000
+              td Neque vel condimentum
+              td No
+            tr.even
+              td Libero
+              td 500
+              td Hendrerit, lectus elit pretium
+              td Yes
+            tr.odd
+              td Tristique
+              td 100.000
+              td Ligula nec consequat
+              td Yes
+            tr.even
+              td Id Neque
+              td 600.000
+              td Etiam sodales orci nec
+              td No
+
+    .fieldset.group
+      header
+        h3 Form with Field Group
+        form#form(accept-charset='UTF-8', action='/action', method='post')
+          fieldset
+              legend Fieldset with legend
+              div
+                label Label for Radios
+                input(name='radio', type='radio', value='')
+                input(name='Radio', type='radio', value='')
+                input(name='Radio', type='radio', value='')
+              div
+                label Label for Checkboxes
+                input(name='checkboxes', type='checkbox', value='')
+                input(name='checkboxes', type='checkbox', value='')
+                input(name='checkboxes', type='checkbox', value='')
+              div
+                label Label for Textfield with Placeholder
+                input#textfield(maxlength='12', size='50', type='text', placeholder='input')
+              div
+                label label for Textarea
+                textarea#text(cols='50', rows='5')
+              div
+                label label for Filefield
+                input(name='files', size='50', type='file')
+              div
+                input(name='button', type='button', value='Button')

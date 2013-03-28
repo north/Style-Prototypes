@@ -1,0 +1,16 @@
+extends layouts/_layout
+
+append stylesheets
+  link(rel="stylesheet", href="/styles/colors.css", type="text/css")
+
+block header
+  mixin header("Color Guide")
+
+block content
+  - var scope = colorShades + 1
+
+  article.color-guide
+    ul
+      each color in colors
+        - for (var i=1; i<scope; i++)
+          li(data-sass="nth($#{color}, #{i})")
