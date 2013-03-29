@@ -163,27 +163,34 @@ block content
     .fieldset.group
       header
         h3 Form with Field Group
-        form#form(accept-charset='UTF-8', action='/action', method='post')
-          fieldset
-              legend Fieldset with legend
-              div
-                label Label for Radios
-                input(name='radio', type='radio', value='')
-                input(name='Radio', type='radio', value='')
-                input(name='Radio', type='radio', value='')
-              div
-                label Label for Checkboxes
-                input(name='checkboxes', type='checkbox', value='')
-                input(name='checkboxes', type='checkbox', value='')
-                input(name='checkboxes', type='checkbox', value='')
-              div
-                label Label for Textfield with Placeholder
-                input#textfield(maxlength='12', size='50', type='text', placeholder='input')
-              div
-                label label for Textarea
-                textarea#text(cols='50', rows='5')
-              div
-                label label for Filefield
-                input(name='files', size='50', type='file')
-              div
-                input(name='button', type='button', value='Button')
+      form#form(accept-charset='UTF-8', action='/action', method='post')
+        fieldset
+            legend Fieldset with legend
+            div
+              label Label for Radios
+              input(name='radio', type='radio', value='')
+              input(name='Radio', type='radio', value='')
+              input(name='Radio', type='radio', value='')
+            div
+              label Label for Checkboxes
+              input(name='checkboxes', type='checkbox', value='')
+              input(name='checkboxes', type='checkbox', value='')
+              input(name='checkboxes', type='checkbox', value='')
+            div
+              label Label for Textfield with Placeholder
+              input#textfield(maxlength='12', size='50', type='text', placeholder='input')
+            div
+              label label for Textarea
+              textarea#text(cols='50', rows='5')
+            div
+              label label for Filefield
+              input(name='files', size='50', type='file')
+            div
+              input(name='button', type='button', value='Button')
+
+    .code.group
+      header
+        h3 Code Block
+      pre
+        -var code = {value: "@mixin triangle($color, $size) {\n  width: 0;\n  height: 0;\n  border-top: $size solid transparent;\n  border-bottom: $size solid transparent;\n\n  border-left: $size solid $color;\n}\n\n.triangle-red {\n  @include triangle(red, 20px);\n}"}
+        code.language-scss= code.value
