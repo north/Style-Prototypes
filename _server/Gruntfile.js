@@ -28,7 +28,10 @@ module.exports = function (grunt) {
         },
         watch: {
             coffee: {
-                files: ['<%= yeoman.app %>/{,**/}*.coffee'],
+                files: [
+                    '<%= yeoman.app %>/{,**/}*.coffee',
+                    '!<%= yeoman.app %>/compass/templates/{,**/}*.coffee',
+                ],
                 tasks: ['coffee:dist']
             },
             coffeeTest: {
@@ -36,7 +39,10 @@ module.exports = function (grunt) {
                 tasks: ['coffee:test']
             },
             compass: {
-                files: ['<%= yeoman.app %>/{,**/}*.{scss,sass}',],
+                files: [
+                    '<%= yeoman.app %>/{,**/}*.{scss,sass}',
+                    '!<%= yeoman.app %>/compass/templates/{,**/}*.{scss,sass}',
+                ],
                 tasks: ['compass']
             },
             jade: {
