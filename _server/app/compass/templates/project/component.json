@@ -1,0 +1,11 @@
+{
+  "name": "Style Prototypes",
+  "version": "1.0.0",
+  "dependencies": {
+    "modernizr": "~2.6.2",
+    "jquery": "~1.9.1",
+    "flexslider": "~0.0.0",
+    "hammer": "~1.0.4"
+  },
+  "devDependencies": {}
+}
