@@ -1,6 +1,6 @@
 include ../setup/client
 include ../setup/sections
-include ../setup/scripts
+include ../setup/assets
 include ../setup/webfonts
 include ../setup/colors/colors
 
@@ -15,15 +15,22 @@ doctype 5
 html.no-js(lang='#{language}')
   //<![endif]
   head
-    title= 'pageTitle'
+    title Style Prototype
+
     link(rel="stylesheet", href="/styles/app.css", type="text/css")
     link(rel="stylesheet", href="/styles/main.css", type="text/css")
+    each file in css
+      link(rel="stylesheet", href=file, type="text/css")
     block stylesheets
 
     - if (typekitID)
       mixin webfonts(typekitID, 'typekit')
     - if (googleFonts)
       mixin webfonts(googleFonts, 'google')
+    each script in scriptsHead
+      script(src=script)
+    block scripts-head
+
   body
     #prototype-header(class='page-wrapper')
       div(class='content-wrapper')
@@ -39,3 +46,6 @@ html.no-js(lang='#{language}')
       div(class='content-wrapper')
         block footer
 
+    each script in scriptsFooter
+      script(src=script)
+    block scripts-footer
