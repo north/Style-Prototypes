@@ -6,7 +6,7 @@ $single-to-multi-column: 600px !default;
 $header-color: #fef9ef !default;
 
 $vertical-horizontal-nav: 721px !default;
-@import "../setup/setup";
+@import "../setup/app/variables";
 
 @mixin golden($dir) {
   @include box-sizing('border-box');
