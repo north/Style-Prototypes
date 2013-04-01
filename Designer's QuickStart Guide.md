@@ -5,7 +5,7 @@ This is a quick start guide for designers unfamiliar with Git or Designing in Br
 
 ## Table of Contents
 
-1. [Basic Requirements](#requirements)
+1. [Basic Requirements](#basic-requirements)
 2. [Getting Started](#getting-started)
 	* [Learning HTML and CSS](#learning-html-and-css)
 	* [Installing Style Prototype Requirements](#installing-style-prototype-requirements)
