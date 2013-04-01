@@ -120,19 +120,19 @@ A folder containing JavaScript for use in your Style Prototype. You can include 
 
 A folder containing sections for your Style Prototypes. Out of the box, three sections will be included: markup, typography, and ui. Inside each of these is a Jade file for creating the associated page. The general pattern for creating a new page is fairly easy to follow from the examples, and you can create as many new pages as you'd like. Be sure to add any new pages to the `sections.jade` file when finished. When you create a new page, you may need to restart your server. If you started your server using the provided application, close the Terminal app and relaunch the application; otherwise, press `ctrl+c` in the terminal window running the server, and restarting the server.
 
-## widgets/
+### widgets/
 
 Sometimes you may want to reuse a bit of code over and over again, and let's be honest, many pieces of functionality on our sites are a collection of things that exist elsewhere. Widgets are a great way to create a reusable chunk of HTML that can be used on multiple different pages without needing to rewrite the HTML each time. It's also a great way for you to see how your generic styling for a certain set of elements works when paired up together in a unified, usable piece. This is the place to build those pieces before actually going and using them.
 
-## colors/
+### colors/
 
 This folder holds setup files for your Color Guide. Inside the `colors/` folder are colors Sass and Jade files. The Sass file contains a mixin call to generate the CSS for your color guide. All of the colors you've defined inside of your Style Guide's Colors partial (`style-guide/global/_colors.scss`) are available for you to use here. The Jade file contains two variables, the first being the variable names of the colors you are using, in the same order you're using them in the Sass file, and the second is the total number of shades of the color that are available. The Color Guide assumes that each color will have the same number of shades. Toolkit's `tint-stack` or `shade-stack` functions both generate a total of 6 colors.
 
-## tile/
+### tile/
 
 This folder holds setup files for your Style Tile. Inside the `tile/` folder are style tile Sass and Jade files. The Sass file should contain styling specific to the Style Tile that you do not want to include in your final Style Guide (such as setting the colors under the Possible Colors section). The Jade file sets up each of the sections of the Style Tile: how many colors to include, what the inspirational images and patterns are, what keywords is the tile meant to embody, and what you'd like to call buttons as well as what classes you'd like applied to them.
 
-## app/
+### app/
 
 This folder holds styling for your Style Prototype as a whole (the Style Prototype application, if you will). Inside the `app/` folder are two Sass files, `variables.scss` and `app.scss`. `variables.scss` is a file storing some basic setup variables for the Style Prototype as a whole. `app.scss` is a file for applying styles to your Style Prototype as a whole that you do not want included in your final Style Guide. This file should be edited sparingly and only to change how the Style Prototype itself looks, for instance floating groups around on various pages, but otherwise should not be really touched. Most of your styling you're going to want to do in your Style Guide.
 
