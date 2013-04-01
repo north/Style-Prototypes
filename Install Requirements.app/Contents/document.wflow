@@ -51,7 +51,7 @@
 				<key>ActionParameters</key>
 				<dict>
 					<key>source</key>
-					<string>on run {input, parameters}		tell application "Terminal"		set currentTab to do script "sudo gem install compass sass toolkit compass-normalize sassy-buttons color-schemer"		activate	end tell		return inputend run</string>
+					<string>on run {input, parameters}		tell application "Finder"   		set sel to item 1 of (get selection)    	if class of sel is folder then        	set currentDir to sel as text    	else        	set currentDir to (container of sel) as text    	end if	end tell	tell application "Terminal"		set currentTab to do script "cd " &amp; (quoted form of POSIX path of currentDir &amp; "_server")		do script "sudo gem install style-prototypes &amp;&amp; npm install &amp;&amp; bower install" in currentTab	end tell		return inputend run</string>
 				</dict>
 				<key>BundleIdentifier</key>
 				<string>com.apple.Automator.RunScript</string>
@@ -68,15 +68,15 @@
 				<key>Class Name</key>
 				<string>RunScriptAction</string>
 				<key>InputUUID</key>
-				<string>75685FCC-DEA7-4F79-9740-4D4A1BD99FA3</string>
+				<string>C0C34D19-68A0-4FF6-BBFE-21B1160ABB8D</string>
 				<key>Keywords</key>
 				<array>
 					<string>Run</string>
 				</array>
 				<key>OutputUUID</key>
-				<string>FA088447-9C80-4A47-9024-F2271BCFD355</string>
+				<string>98ADC30F-A302-4225-B124-6E105752785A</string>
 				<key>UUID</key>
-				<string>E6BE3BD5-B440-4A0F-9CE9-3642BD3300E6</string>
+				<string>F0D2157B-7F6A-4CE4-82DD-3290D92C5186</string>
 				<key>UnlocalizedApplications</key>
 				<array>
 					<string>Automator</string>
