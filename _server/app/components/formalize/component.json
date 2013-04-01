@@ -1,0 +1,9 @@
+{
+  "name": "formalize",
+  "version": "0.0.0",
+  "commit": "fa641e6f2dd831406f2a804bf67d043420a93cba",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nathansmith/formalize"
+  }
+}
