@@ -25,10 +25,10 @@
         height: 3em;
         position: relative;
 
-        @include grid-span(1, 1, $length, 0, $output: 'float');
+        @include grid-span(1, 1, $length, 0, $output-style: 'float');
 
         &:nth-child(#{$length}n) {
-          @include grid-span(1, ($length), $length, 0, $output: 'float');
+          @include grid-span(1, ($length), $length, 0, $output-style: 'float');
           margin-right: 0;
         }
 
