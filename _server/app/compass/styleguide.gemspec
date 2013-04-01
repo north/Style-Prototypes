@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   # Gem Details
   # Replace "styleguide" with the name of your extension
   s.name = "styleguide"
+  s.rubyforge_project = "styleguide"
   # Description of your extension
   s.description = %q{Style Guide}
   # A summary of your Compass extension. Should be different than Description
@@ -52,9 +53,5 @@ Gem::Specification.new do |s|
   #  user's system when installing your gem.
   s.add_dependency("sass",              [">=3.2.3"])
   s.add_dependency("compass",           [">= 0.12.1"])
-  s.add_dependency("toolkit",           [">=0.2.6"])
-  s.add_dependency("compass-normalize", [">=1.4.1"])
-  s.add_dependency("color-schemer",     [">=0.2.3"])
-  s.add_dependency("modular-scale",     [">=1.0.6"])
-  s.add_dependency("sassy-buttons",     ["0.1.4"])
+  s.add_dependency("style-prototypes",  [">=1.0.0"])
 end
