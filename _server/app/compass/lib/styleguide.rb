@@ -24,7 +24,7 @@ Compass::Frameworks.register('styleguide', :stylesheets_directory => stylesheets
 #    a prerelease version
 #  Date is in the form of YYYY-MM-DD
 module Styleguide
-  VERSION = "1.0"
+  VERSION = "1.0.0"
   DATE = "2012-03-22"
 end
 
