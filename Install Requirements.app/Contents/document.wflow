@@ -51,7 +51,24 @@
 				<key>ActionParameters</key>
 				<dict>
 					<key>source</key>
-					<string>on run {input, parameters}		tell application "Finder"   		set sel to item 1 of (get selection)    	if class of sel is folder then        	set currentDir to sel as text    	else        	set currentDir to (container of sel) as text    	end if	end tell	tell application "Terminal"		set currentTab to do script "cd " &amp; (quoted form of POSIX path of currentDir &amp; "_server")		do script "sudo gem install style-prototypes &amp;&amp; npm install &amp;&amp; bower install" in currentTab	end tell		return inputend run</string>
+					<string>on run {input, parameters}
+
+	tell application "Finder"
+   		set sel to item 1 of (get selection)
+    	if class of sel is folder then
+        	set currentDir to sel as text
+    	else
+        	set currentDir to (container of sel) as text
+    	end if
+	end tell
+
+	tell application "Terminal"
+		set currentTab to do script "cd " &amp; (quoted form of POSIX path of currentDir &amp; "_server")
+		do script "sudo gem install bundler &amp;&amp; npm install &amp;&amp; bower install &amp;&amp; bundle install" in currentTab
+	end tell
+
+	return input
+end run</string>
 				</dict>
 				<key>BundleIdentifier</key>
 				<string>com.apple.Automator.RunScript</string>
@@ -87,9 +104,9 @@
 					<dict>
 						<key>default value</key>
 						<string>on run {input, parameters}
-	
+
 	(* Your script goes here *)
-	
+
 	return input
 end run</string>
 						<key>name</key>
