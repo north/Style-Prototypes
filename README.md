@@ -175,12 +175,8 @@ If you're using Bower components, you won't get them when using Compass's instal
 ## License
 © Sam Richard and Mason Wendell
 
-Original code licensed under MIT/GLPv2
+Original code licensed under [GLPv3](http://www.gnu.org/licenses/gpl-3.0.html)
 Open Source projects used within this project retain their original licenses.
 
 Launch icon by [Everaldo Coelho](http://www.everaldo.com/#3cf/twitter)
 Gear icon by [Keyamoon](http://keyamoon.com/)
-
-GPL license: http://www.gnu.org/licenses/gpl.html
-
-MIT license: http://www.opensource.org/licenses/mit-license.php
