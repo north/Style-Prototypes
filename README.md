@@ -34,7 +34,7 @@ Come with me on this journey.
 
 ## Requirements and Installation
 
-Style Prototypes, a their core, are [Yeoman](http://yeoman.io/) powered webapps; simply installing Yeoman will get you very far towards having a fully running Style Prototype. In addition, there are a handful of Bower components and Compass extensions that are required for everything to run properly. You have two ways of installing all of the requirements. If you are on a Mac, the easiest way is to launch the "Install Requirements" application. You will be prompted to type in your user password (you won't see anything when you type in your password, just trust it's there) and press enter. That'll install everything you need. If you're not on a Mac, or would like to do it the old fashioned way, the following line should install everything for you (from the command line):
+Style Prototypes, at their core, are [Yeoman](http://yeoman.io/) powered webapps; simply installing Yeoman will get you very far towards having a fully running Style Prototype. In addition, there are a handful of Bower components and Compass extensions that are required for everything to run properly. You have two ways of installing all of the requirements. If you are on a Mac, the easiest way is to launch the "Install Requirements" application. You will be prompted to type in your user password (you won't see anything when you type in your password, just trust it's there) and press enter. That'll install everything you need. If you're not on a Mac, or would like to do it the old fashioned way, the following line should install everything for you (from the command line):
 
 If you don't have [Bundler](http://gembundler.com) installed
 ```bash
