@@ -77,7 +77,7 @@ module.exports = function (grunt) {
             }]
         },
         jade: {
-            dist: {
+	    app: {
                 options: {
                     pretty: true
                 },
@@ -92,6 +92,22 @@ module.exports = function (grunt) {
                     ],
                     ext: '.html'
                 }]
+	    },
+	    dist: {
+		options: {
+		    pretty: true
+		},
+		files: [{
+		    expand: true,
+		    cwd: '<%= yeoman.app %>',
+		    dest: '<%= yeoman.dist %>',
+		    src: [
+			'{,**/}*.jade',
+			'!{,**/}setup/sections/{,**/}*.jade',
+			'!{,**/}setup/widgets/{,**/}*.jade'
+		    ],
+		    ext: '.html'
+		}]
             }
         },
         connect: {
@@ -299,7 +315,7 @@ module.exports = function (grunt) {
             'clean:server',
             'coffee:dist',
             'compass:server',
-            'jade',
+	    'jade:app',
             'livereload-start',
             'connect:livereload',
             'open',
@@ -319,7 +335,7 @@ module.exports = function (grunt) {
         'clean:dist',
         'coffee',
         'compass:dist',
-        'jade',
+	'jade:dist',
         'useminPrepare',
         'imagemin',
         'htmlmin',
