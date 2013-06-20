@@ -23,5 +23,9 @@ mixin webfonts(id, type)
         wf.type = 'text/javascript';
         wf.async = 'true';
         var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(wf, s);
+        
+        // what if s is 'undefined'?
+        if (s && s.parentNode) {
+          s.parentNode.insertBefore(wf, s);
+        }
       })();
