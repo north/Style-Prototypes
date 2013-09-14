@@ -4,7 +4,7 @@
 
 ## Style Prorotypes is now a [Yeoman Generator](https://github.com/Team-Sass/generator-style-prototype)
 
-#### You are free to continue to use this version, however, the generator will be getting the majority of the attention from now on.
+#### You are free to continue to use this version, however, the generator is now the primary project and continued development on this version has stopped.
 
 Designing in browser is a long wished for goal but always has seemed just slightly out of reach. From the technical knowledge needed to set everything up to actually do the coding to getting sign off from clients, it seems like a daunting task to begin to do it. Style Prototypes aims to make the whole process much easier and much more approachable for everyone from Designers who don't know what a Git is to full on Unicorns. Style Prototypes grew from the wonderful Style Guide built by [Mason Wendell](http://twitter.com/codingdesigner) for his kick ass [Survival Kit](http://github.com/canarymason/survival-kit) and now constitutes a whole system for building [Style Tiles](http://styletil.es/), Style Guides, and Color Guides straight in browser. By leveraging the power of Sass, Compass, Jade, Yeoman, Grunt, and Bower, we are able have at our fingertips the tools necessary to sit back and just design. If you're a designer new to all of this, I've written up a [Designer's QuickStart Guide](https://github.com/Snugug/Style-Sites/blob/master/Designer's%20QuickStart%20Guide.md#designers-quickstart-guide) to get you started! Read it and enjoy it!
 
