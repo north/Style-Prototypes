@@ -10,10 +10,13 @@
   ],
   "dependencies": {
     "eq.js": "~1.4.1",
-    "borealis": "~1.0.1"
+    "borealis": "~1.0.1",
+    "js-yaml": "~3.0.2",
+    "angular": "~1.2.16",
+    "jquery": "~2.1.0",
+    "ish.": "git@github.com:Snugug/ish..git"
   },
   "devDependencies": {
     "north": "~0.2.0"
   }
 }
-
