@@ -1,0 +1,155 @@
+//////////////////////////////
+// Variables
+//////////////////////////////
+$two-columns: 37.5em;
+$black: #3c3c3c;
+
+//////////////////////////////
+// All Style Prototype Items
+//////////////////////////////
+[data-sp-class] {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+//////////////////////////////
+// Style Tile Wrapper
+//////////////////////////////
+[data-sp-class="__style-tile"] {
+
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+//////////////////////////////
+// Style Tile Content Area
+//////////////////////////////
+[data-sp-class="__style-tile--content"] {
+  margin-bottom: .75em;
+  @media (min-width: #{$two-columns}) {
+    width: 61.8%;
+    float: left;
+    padding: .25em .5em;
+  }
+}
+
+//////////////////////////////
+// Style Tile Abstracts
+//////////////////////////////
+[data-sp-class="__style-tile--abstracts"] {
+  margin-bottom: .75em;
+  @media (min-width: #{$two-columns}) {
+    width: 38.2%;
+    float: right;
+    clear: right;
+    padding: .25em .5em;
+  }
+}
+
+//////////////////////////////
+// Style Tile Lists
+//////////////////////////////
+%style-tile--list {
+  list-style: none;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+//////////////////////////////
+// Colors
+//////////////////////////////
+[data-sp-class="style-tile--COLORS"] {
+  @extend %style-tile--list;
+}
+//////////////////////////////
+// Images
+//////////////////////////////
+[data-sp-class="style-tile--IMAGES"] {
+  @extend %style-tile--list;
+}
+//////////////////////////////
+// Descriptors
+//////////////////////////////
+[data-sp-class="style-tile--DESCRIPTORS"] {
+  @extend %style-tile--list;
+}
+
+//////////////////////////////
+// Style Tile Item
+//////////////////////////////
+[data-sp-class^="style-tile--item"] {
+  display: inline-block;
+  vertical-align: middle;
+  margin: .25em;
+
+  [data-sp-class="style-tile--COLORS"] & {
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+  }
+
+  [data-sp-class="style-tile--IMAGES"] & {
+    width: 50%;
+    margin: 0;
+    padding: .25em;
+
+    @media (min-width: #{$two-columns - 10.75em}) {
+      width: 33%;
+    }
+
+    @media (min-width: #{$two-columns}) {
+      width: 100%;
+    }
+
+    @media (min-width: #{$two-columns + 9.75em}) {
+      width: 50%;
+    }
+
+    @media (min-width: #{$two-columns + 43.5em}) {
+      width: 33%;
+    }
+
+    @media (min-width: #{$two-columns + 94.25em}) {
+      width: 25%;
+    }
+
+    > img {
+      max-width: 100%;
+      height: auto;
+      border-radius: .5em;
+    }
+  }
+}
+
+//////////////////////////////
+// Section Headers
+//////////////////////////////
+[data-sp-class="section--header"] {
+  font-family: "HelveticaNeue", "Helvetica", "Arial", sans-serif;
+  font-weight: normal;
+  font-size: .7em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+
+  color: $black;
+  border-bottom: 1px solid rgba($black, .15);
+
+  width: 100%;
+  clear: both;
+  margin: 2em 0;
+  padding: 1em 0 .15em;
+
+  :first-of-type & {
+    margin-top: 0;
+  }
+}
+
+[data-sp-class="section--group"] {
+  padding: 1em;
+  margin-bottom: 2em;
+}

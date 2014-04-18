@@ -14,7 +14,9 @@
     "js-yaml": "~3.0.2",
     "angular": "~1.2.16",
     "jquery": "~2.1.0",
-    "ish.": "git@github.com:Snugug/ish..git"
+    "angular-local-storage": "~0.0.1",
+    "ish": "git@github.com:Snugug/ish.git",
+    "angular-route": "~1.2.16"
   },
   "devDependencies": {
     "north": "~0.2.0"

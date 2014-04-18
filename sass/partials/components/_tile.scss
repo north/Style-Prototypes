@@ -1,0 +1,27 @@
+@import "tile/variables";
+@import "tile/mixins";
+@import "tile/extends";
+
+.tile--COLORS {
+  @extend %tile--list;
+}
+
+.tile--IMAGES {
+  @extend %tile--list;
+}
+
+.tile--DESCRIPTORS {
+  @extend %tile--list;
+}
+
+[class*="tile--item-"] {
+  @extend %tile--item;
+
+  .tile--COLORS & {
+    @extend %tile--color-item;
+  }
+
+  .tile--IMAGES & {
+    @extend %tile--image-item;
+  }
+}

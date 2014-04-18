@@ -3,20 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <title>Style Prototype</title>
+  <!-- build:css css/app.css -->
+  <link rel="stylesheet" href="css/prototype.css">
   <link rel="stylesheet" href="css/style.css">
+  <!-- endbuild -->
+  <base href="/">
 </head>
 <body>
-
-  <header ng-controller="spYamlRead">
-    <component name="message" aspect="error"></component>
-
-    <component name="message" aspect="warning"></component>
-
+  <header>
+    <div menu="menu"></div>
   </header>
+<!--
+  <header ng-controller="spYamlRead">
+    <input type="search" ng-model="search" placeholder="Search">
+    <ul>
+      <li ng-repeat="cmpt in components.files | filter:search | orderBy:'name'">
+        <span ng-include="cmpt.path"></span>
+      </li>
+    </ul>
+
+  </header> -->
+
+  <main ng-view>
+
+  </main>
 
   <!-- build:js js/app.js -->
-  <script src="bower_components/angular/angular.min.js"></script>
-  <script src="bower_components/js-yaml/js-yaml.min.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/js-yaml/js-yaml.js"></script>
+  <script src="bower_components/angular-local-storage/angular-local-storage.js"></script>
+
   <script src="js/app.js"></script>
   <!-- endbuild -->
 </body>

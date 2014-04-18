@@ -1,0 +1,25 @@
+%tile--list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+%tile--item {
+  display: inline-block;
+  margin: $tile--item-margin;
+}
+
+%tile--color-item {
+  @extend %tile--item;
+  height: $tile--swatch-size;
+  width: $tile--swatch-size;
+  border-radius: $tile--border-radius;
+}
+
+%tile--image-item {
+  @extend %tile--item;
+  max-width: $tile--image-size;
+  border-radius: $tile--border-radius;
+  box-shadow: 0 0 0 1px mix(black, $tile--border-color, 60%), 0 0 0 3px $tile--border-color, 0 0 0 4px mix(black, $tile--border-color, 60%);
+}

@@ -1,0 +1,15 @@
+@import "style-tile/variables";
+@import "style-tile/mixins";
+@import "style-tile/extends";
+
+.__style-tile {
+  @extend %__style-tile;
+
+  &--content {
+    @extend %__style-tile--content;
+  }
+
+  &--abstracts {
+    @extend %__style-tile--abstracts;
+  }
+}

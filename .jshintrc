@@ -12,7 +12,7 @@
   // "jquery": true,
 
   // Defines globals  that are usually used for logging poor-man's debugging: `console`, `alert`, etc…
-  // "devel": true,
+  "devel": true,
 
   /*
    * ENFORCING OPTIONS
@@ -51,7 +51,7 @@
   "unused": true,
 
   // Enforce line length to 80 characters
-  "maxlen": 80,
+  // "maxlen": 80,
 
   // Enforce placing 'use strict' at the top function scope
   "strict": true,

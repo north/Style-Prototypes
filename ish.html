@@ -5,31 +5,52 @@
   <title>Style Prototypes</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- build:css css/app.css -->
-  <link rel="stylesheet" href="bower_components/ish./styles.css">
+  <link rel="stylesheet" href="bower_components/ish/styles.css">
   <!-- endbuild -->
 </head>
 <body>
   <header class="sg-header" role="banner">
-    <div class="sg-controls" id="sg-controls">
-      <div class="sg-control-content">
-        <ul class="sg-control">
-          <li class="sg-size">
-            <div class="sg-current-size">
-              <form id="sg-form">
-                Size <input type="text" class="sg-input sg-size-px" value="320">px
-              </form><!--end #sg-form-->
-            </div><!--end #sg-current-size-->
-            <ul class="sg-acc-panel sg-size-options">
-              <li class="sg-quarter"><a href="#" id="sg-size-s">S</a></li>
-              <li class="sg-quarter"><a href="#" id="sg-size-m">M</a></li>
-              <li class="sg-quarter"><a href="#" id="sg-size-l">L</a></li>
-              <li class="sg-half"><a href="#" id="sg-size-full">Full</a></li>
-              <li class="sg-half"><a href="#" id="sg-size-random">Random</a></li>
-              <li class="sg-half"><a href="#" class="mode-link" id="sg-size-disco">Disco</a></li>
-              <li class="sg-half"><a href="#" class="mode-link" id="sg-size-hay">Hay!</a></li>
-            </ul>
-          </li>
-        </ul>
+    <div class="sg-nav-container" id="sg-nav-container">
+      <!-- <ol class="sg-nav">
+        <li class="sg-nav-style-tile">
+          <a href="style-tile">Style Tile</a>
+        </li>
+        <li class="sg-nav-base">
+          <a class="sg-acc-handle">Base</a>
+          <ol class="sg-acc-panel">
+            <li class="sg-nav-text">
+              <a class="sg-acc-handle">Forms</a>
+              <ol class="sg-acc-panel sg-sub-nav">
+                <li><a href="base/forms" class="sg-pop">Forms</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+      </ol> -->
+      <div class="sg-controls" id="sg-controls">
+        <div class="sg-control-content">
+          <ul class="sg-control">
+            <li class="sg-size">
+              <div class="sg-current-size">
+                <form id="sg-form">
+                  Size <input type="text" class="sg-input sg-size-px" value="320">px
+                </form><!--end #sg-form-->
+              </div><!--end #sg-current-size-->
+              <ul class="sg-acc-panel sg-size-options">
+                <li class="sg-quarter"><a href="#" id="sg-size-s">S</a></li>
+                <li class="sg-quarter"><a href="#" id="sg-size-m">M</a></li>
+                <li class="sg-quarter"><a href="#" id="sg-size-l">L</a></li>
+                <li class="sg-half"><a href="#" id="sg-size-full">Full</a></li>
+                <li class="sg-half"><a href="#" id="sg-size-random">Random</a></li>
+                <li class="sg-half"><a href="#" class="mode-link" id="sg-size-disco">Disco</a></li>
+                <li class="sg-half"><a href="#" class="mode-link" id="sg-size-hay">Hay!</a></li>
+              </ul>
+            </li>
+            <li class="sg-size">
+              <input id="search" class="sg-half" type="search" ng-model="search" placeholder="Search">
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </header>
@@ -38,7 +59,7 @@
   <div id="sg-vp-wrap">
     <div id="sg-cover"></div>
     <div id="sg-gen-container">
-      <iframe id="sg-viewport" src="angular.html"></iframe>
+      <iframe id="sg-viewport" src="index.html#/components"></iframe>
       <div id="sg-rightpull-container">
         <div id="sg-rightpull"></div>
       </div>
@@ -48,9 +69,10 @@
 
   <!-- build:js js/ish.js -->
   <script src="bower_components/jquery/dist/jquery.js"></script>
-  <script src="bower_components/ish./js/url-handler.js"></script>
-  <script src="bower_components/ish./js/data-saver.js"></script>
-  <script src="bower_components/ish./js/init.js"></script>
+  <script src="bower_components/ish/js/url-handler.js"></script>
+  <script src="bower_components/ish/js/data-saver.js"></script>
+  <script src="bower_components/ish/js/init.js"></script>
+  <script src="js/ish.js"></script>
   <!-- endbuild -->
 
 </body>

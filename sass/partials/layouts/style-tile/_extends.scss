@@ -1,0 +1,44 @@
+%__style-tile {
+  max-width: $__style-tile--max-width;
+  margin: 0 auto;
+
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+%__style-tile--content {
+  @if mixin-exists(breakpoint) {
+    @include breakpoint($__style-tile--multi-column-break) {
+      width: $__style-tile--content-width;
+      float: left;
+    }
+  }
+  @else {
+    @media (min-width: #{$__style-tile--multi-column-break}) {
+      width: $__style-tile--content-width;
+      float: left;
+    }
+  }
+
+}
+
+%__style-tile--abstracts {
+  @if mixin-exists(breakpoint) {
+    @include breakpoint($__style-tile--multi-column-break) {
+      width: $__style-tile--abstracts-width;
+      float: right;
+      clear: right;
+    }
+  }
+  @else {
+    @media (min-width: #{$__style-tile--multi-column-break}) {
+      width: $__style-tile--abstracts-width;
+      float: right;
+      clear: right;
+    }
+  }
+
+}
