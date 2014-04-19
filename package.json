@@ -19,6 +19,7 @@
     "gulp-subtree": "^0.1.0",
     "gulp-filter": "^0.4.1",
     "gulp-load": "^0.1.1",
-    "require-dir": "^0.1.0"
+    "require-dir": "^0.1.0",
+    "underscore.string": "^2.3.3"
   }
 }

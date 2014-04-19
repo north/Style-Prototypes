@@ -73,6 +73,13 @@ module.exports = function (gulp) {
       .pipe(browserSync.reload({stream: true}));
   });
 
+  gulp.task('walk', function () {
+    gulp.src('components')
+      .pipe(folderwalk({
+        'base': 'components'
+      }))
+  });
+
   //////////////////////////////
   // BrowserSync Task
   //////////////////////////////

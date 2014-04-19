@@ -5,6 +5,62 @@ var walk = require('walk');
 var jf = require('jsonfile');
 var chalk = require('chalk');
 var fs = require('fs');
+var path = require('path');
+var _s = require ('underscore.string');
+var util = require('util');
+
+var dirTree = function (filename) {
+  var name = path.basename(filename);
+
+  if (name.charAt(0) === '.') {
+    return {
+      skip: true,
+      path: path.basename(filename)
+    };
+  }
+
+  name = name.replace('.html', '');
+
+  var menuName = name.replace(/--/g, '|&&|');
+      menuName = menuName.replace(/-/g, ' ');
+      menuName = menuName.replace(/\|\&\&\|/g, ' - ');
+      menuName = _s.titleize(menuName);
+
+
+
+  var stats = fs.lstatSync(filename),
+      info = {
+        title: menuName
+      };
+
+  if (stats.isDirectory()) {
+    // info.type = "folder";
+    info.submenu = fs.readdirSync(filename).map(function(child) {
+      return dirTree(filename + '/' + child);
+    });
+
+    info.submenu.push({
+      title: 'View All',
+      href: '#/' + filename
+    });
+  } else {
+      if (path.basename(filename).indexOf('.html') === -1) {
+        return {
+          skip: true,
+          path: path.basename(filename)
+        };
+    }
+
+    info.href = '#/?id=' + path.dirname(filename).replace(/\//g, '-') + '--' + name;
+      // Assuming it's a file. In real life it could be a symlink or
+      // something else!
+  }
+
+
+
+  return info;
+
+}
 
 var folderwalk = function (options) {
   // Make sure Data folder is available
@@ -15,11 +71,11 @@ var folderwalk = function (options) {
     fs.mkdirSync('.www/data');
   }
 
-  return es.map(function (file, cb) {
+  return es.map(function (gulpFile, cb) {
     if (options === undefined && options.base === undefined) {
       return cb(
         new gutil.PluginError("gulp-folderwalk", "Folder Walk must be called with a base folder to walk"),
-        file
+        gulpFile
       );
     }
 
@@ -30,47 +86,54 @@ var folderwalk = function (options) {
     var walker = walk.walk(base);
 
     walker.on('file', function(root, stat, next) {
+
       var fileName = stat.name;
           fileName = fileName.replace('.html', '');
+      var fileTitle = fileName.replace(/--/g, '|&&|');
+          fileTitle = fileTitle.replace(/-/g, ' ');
+          fileTitle = fileTitle.replace(/\|\&\&\|/g, ' - ');
+          fileTitle = _s.titleize(fileTitle);
       var filePath = root + '/' + stat.name;
-      var fileRoot = root.replace(base, '');
-          fileRoot = fileRoot.charAt(0) === '/' ? fileRoot.substr(1) : fileRoot;
+      var fileRoot = root.charAt(0) === '/' ? root.substr(1) : root;
+      var fileId = fileRoot.replace(/\//g, '-') + '--' + fileName;
+
       var file = {
         "name": fileName,
+        "title": fileTitle,
+        "id": fileId,
         "path": filePath,
         "root": fileRoot
       };
 
+      if (folders.indexOf(fileRoot) === -1) {
+        folders.push(fileRoot);
+      }
+
       // Ignore Dot Files
-      if (fileName.charAt(0) !== '.') {
+      if (fileName.charAt(0) !== '.' && stat.name.indexOf('.html') > -1) {
         files.push(file);
       }
       next();
     });
 
     walker.on('end', function () {
-      for (var i in files) {
-        var folder = files[i].root;
-        if (folders.indexOf(folder) === -1)  {
-          folders.push(folder);
-        }
-      }
 
       var build = {
         "files": files,
-        "folders": folders
+        "folders": folders,
+        "menu": [dirTree(base)]
       };
 
       jf.writeFile(fileName, build, function(err) {
         if (err) {
           return cb(
             new gutil.PluginError("gulp-folderwalk", err),
-            file
+            gulpFile
           );
         }
         else {
           gutil.log('Wrote ' + chalk.magenta(fileName));
-          return cb(null, file);
+          return cb(null, gulpFile);
         }
       });
     });
@@ -80,3 +143,4 @@ var folderwalk = function (options) {
 module.exports.folderwalk = function (options) {
   return folderwalk(options);
 }
+

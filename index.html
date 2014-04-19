@@ -10,8 +10,8 @@
   <base href="/">
 </head>
 <body>
-  <header>
-    <div menu="menu"></div>
+  <header ng-controller="StyleTileHeader">
+    <nav role="navigation" data-sp-class="navigation"><div menu="menu"></div></nav>
   </header>
 <!--
   <header ng-controller="spYamlRead">
@@ -34,6 +34,7 @@
   <script src="bower_components/js-yaml/js-yaml.js"></script>
   <script src="bower_components/angular-local-storage/angular-local-storage.js"></script>
 
+  <script src="js/directives.js"></script>
   <script src="js/app.js"></script>
   <!-- endbuild -->
 </body>
