@@ -10,12 +10,15 @@
   <base href="/">
 </head>
 <body>
-  <header ng-controller="StyleTileHeader">
-    <nav role="navigation" data-sp-class="navigation"><div menu="menu"></div></nav>
+  <header ng-controller="GlobalHeader">
+    <nav role="navigation" data-sp-class="navigation">
+      <div menu="menu"></div>
+      <input type="search" ng-model="search.term" placeholder="Search" data-sp-class="navigation--search">
+    </nav>
   </header>
 <!--
   <header ng-controller="spYamlRead">
-    <input type="search" ng-model="search" placeholder="Search">
+
     <ul>
       <li ng-repeat="cmpt in components.files | filter:search | orderBy:'name'">
         <span ng-include="cmpt.path"></span>

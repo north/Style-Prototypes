@@ -10,7 +10,7 @@
   sp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
       .when('/', {
-        template: '<input type="search" ng-model="search" placeholder="Search"><h1 ng-if=\"components\" data-sp-class=\"section--header\">Components</h1><ul><li ng-repeat="cmpt in components | filter:search | orderBy:\'name\'" data-sp-class="section--group"><h2 id="{{cmpt.id}}" data-sp-class=\"section--header\"><a href="#/?id={{cmpt.id}}">{{cmpt.name}}</a></h2><span ng-include="cmpt.path"></span></li></ul>',
+        template: '<h1 ng-if=\"components\" data-sp-class=\"section--header\">Components</h1><ul><li ng-repeat="cmpt in components | filter:search.term | orderBy:\'id\'" data-sp-class="section--group"><h2 id="{{cmpt.id}}" data-sp-class=\"section--header\"><a href="#/?id={{cmpt.id}}">{{cmpt.name}}</a></h2><span ng-include="cmpt.path"></span></li></ul>',
         controller: 'RootCtrl'
       })
       .when('/style-tile', {
@@ -18,7 +18,7 @@
         controller: 'StyleTileCtrl'
       })
       .when('/components', {
-        template: '<input type="search" ng-model="search" placeholder="Search"><ul><li ng-repeat="cmpt in components.files | filter:search | orderBy:\'name\'" data-sp-class="section--group"><h2 id="{{cmpt.id}}" data-sp-class=\"section--header\"><a href="#/?id={{cmpt.id}}">{{cmpt.name}}</a></h2><span ng-include="cmpt.path"></span></li></ul>',
+        template: '<ul><li ng-repeat="cmpt in components.files | filter:search.term | orderBy:\'id\'" data-sp-class="section--group"><h2 id="{{cmpt.id}}" data-sp-class=\"section--header\"><a href="#/?id={{cmpt.id}}">{{cmpt.name}}</a></h2><span ng-include="cmpt.path"></span></li></ul>',
         controller: 'ComponentsCtrl'
       })
       .otherwise({
@@ -36,7 +36,8 @@
     };
   });
 
-  sp.controller('RootCtrl', ['$scope', '$routeParams', 'data', function ($scope, $routeParams, data) {
+  sp.controller('RootCtrl', ['$scope', '$routeParams', 'data', 'GlobalSearch', function ($scope, $routeParams, data, GlobalSearch) {
+    $scope.search = GlobalSearch;
     data.get().then(function (components) {
       var comps = [];
 
@@ -56,12 +57,18 @@
     });
   }]);
 
-  sp.controller('StyleTileHeader', ['$scope', 'data', function ($scope, data) {
+  sp.controller('GlobalHeader', ['$scope', 'data', 'GlobalSearch', function ($scope, data, GlobalSearch) {
     data.get().then(function (components) {
-      // console.log(components);
       $scope.menu = components.menu;
+      $scope.search = GlobalSearch;
     });
   }]);
+
+  sp.service('GlobalSearch', function () {
+    return {
+      term: ''
+    };
+  });
 
   sp.controller('StyleTileCtrl', ['$scope', '$http', function ($scope, $http) {
     $http.get('pages/style-tile.yml')
@@ -70,10 +77,10 @@
       });
   }]);
 
-  sp.controller('ComponentsCtrl', ['$scope', 'data', function ($scope, data) {
+  sp.controller('ComponentsCtrl', ['$scope', 'data', 'GlobalSearch', function ($scope, data, GlobalSearch) {
+    $scope.search = GlobalSearch;
     data.get().then(function (components) {
       $scope.components = components;
-      $scope.search = '';
 
 
 
