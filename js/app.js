@@ -60,6 +60,10 @@
   sp.controller('GlobalHeader', ['$scope', 'data', 'GlobalSearch', function ($scope, data, GlobalSearch) {
     data.get().then(function (components) {
       $scope.menu = components.menu;
+      $scope.menu.push({
+        title: 'Style Tile',
+        href: '#/style-tile'
+      });
       $scope.search = GlobalSearch;
     });
   }]);
