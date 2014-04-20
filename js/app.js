@@ -22,7 +22,7 @@
         controller: 'IshCtrl'
       })
       .when('/:view', {
-        template: '<ul><li ng-repeat="cmpt in components | filter:search.term | orderBy:\'id\'" data-sp-class="section--group"><h2 id="{{cmpt.id}}" data-sp-class=\"section--header\"><a href="#/?id={{cmpt.id}}">{{cmpt.name}}</a></h2><span ng-include="cmpt.path"></span></li></ul>',
+        template: '<ul><li ng-repeat="cmpt in components | filter:search.term | orderBy:\'id\'" data-sp-class="section--group"><h2 id="{{cmpt.id}}" data-sp-class=\"section--header\"><a id="{{cmpt.id}}" href="#/?id={{cmpt.id}}" ng-click="updateId($event)">{{cmpt.name}}</a></h2><span ng-include="cmpt.path"></span></li></ul>',
         controller: 'ComponentsCtrl'
       })
       .otherwise({
@@ -105,23 +105,22 @@
       });
   }]);
 
-  sp.controller('ComponentsCtrl', ['$scope', 'data', '$routeParams', 'GlobalSearch', function ($scope, data, $routeParams, GlobalSearch) {
-
-    console.log($routeParams);
+  sp.controller('ComponentsCtrl', ['$scope', 'data', '$routeParams', '$location', 'GlobalSearch', function ($scope, data, $routeParams, $location, GlobalSearch) {
 
     $scope.search = GlobalSearch;
     data.get().then(function (components) {
       var display = [];
-      if ($routeParams.group) {
-        for (var i in components.files) {
-          if (components.files[i].group.indexOf($routeParams.group) === 0) {
-            display.push(components.files[i]);
+
+      if ($routeParams.id) {
+        for (var j in components.files) {
+          if (components.files[j].id === $routeParams.id) {
+            display.push(components.files[j]);
           }
         }
       }
-      else if ($routeParams.id) {
+      else if ($routeParams.group) {
         for (var i in components.files) {
-          if (components.files[i].id === $routeParams.id) {
+          if (components.files[i].group.indexOf($routeParams.group) === 0) {
             display.push(components.files[i]);
           }
         }
@@ -132,7 +131,12 @@
 
       $scope.components = display;
 
-
+      $scope.updateId = function ($event) {
+        $event.preventDefault();
+        var id = $event.srcElement.getAttribute('id');
+        $location.search('group', null);
+        $location.search('id', id);
+      };
 
       window.addEventListener('message',function(event) {
         if (event.origin !== window.location.protocol + '//' + window.location.host) {
