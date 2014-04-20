@@ -38,6 +38,13 @@ module.exports = function (gulp) {
       ]));
   });
 
+  gulp.task('walk', function () {
+    gulp.src('components/**/*.html')
+      .pipe(folderwalk({
+        'base': 'components'
+      }));
+  });
+
   //////////////////////////////
   // Watch
   //////////////////////////////

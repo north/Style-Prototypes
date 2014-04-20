@@ -18,31 +18,47 @@ var dirTree = function (filename) {
       path: path.basename(filename)
     };
   }
-
   name = name.replace('.html', '');
+
+  var base = filename.replace(path.basename(filename), '').split('/')[0];
 
   var menuName = name.replace(/--/g, '|&&|');
       menuName = menuName.replace(/-/g, ' ');
       menuName = menuName.replace(/\|\&\&\|/g, ' - ');
       menuName = _s.titleize(menuName);
 
-
-
   var stats = fs.lstatSync(filename),
       info = {
         title: menuName
       };
 
+  var group = filename.replace(path.basename(filename), '');
+      group = group.split('/');
+      group = group.splice(1, group.length - 2);
+      group = group.join('-');
+
   if (stats.isDirectory()) {
+    group = filename.split('/').splice(1).join('-');
+
     // info.type = "folder";
     info.submenu = fs.readdirSync(filename).map(function(child) {
       return dirTree(filename + '/' + child);
     });
 
-    info.submenu.push({
-      title: 'View All',
-      href: '#/' + filename
-    });
+    // console.log(group);
+
+    if (group === '') {
+      info.submenu.push({
+        title: 'View All',
+        href: '#/' + filename
+      });
+    }
+    else {
+      info.submenu.push({
+        title: 'View All',
+        href: '#/' + base + '?group=' + group
+      });
+    }
   } else {
       if (path.basename(filename).indexOf('.html') === -1) {
         return {
@@ -51,7 +67,9 @@ var dirTree = function (filename) {
         };
     }
 
-    info.href = '#/?id=' + path.dirname(filename).replace(/\//g, '-') + '--' + name;
+    var id = group + '--' + name;
+        id = id.indexOf('--') === 0 ? id.substr(2) : id;
+    info.href = '#/' + base + '?id=' + id;
       // Assuming it's a file. In real life it could be a symlink or
       // something else!
   }
@@ -95,14 +113,15 @@ var folderwalk = function (options) {
           fileTitle = _s.titleize(fileTitle);
       var filePath = root + '/' + stat.name;
       var fileRoot = root.charAt(0) === '/' ? root.substr(1) : root;
-      var fileId = fileRoot.replace(/\//g, '-') + '--' + fileName;
+      var fileId = fileRoot.split('/').splice(1).join('-') + '--' + fileName;
+          fileId = fileId.indexOf('--') === 0 ? fileId.substr(2) : fileId;
 
       var file = {
         "name": fileName,
         "title": fileTitle,
         "id": fileId,
         "path": filePath,
-        "root": fileRoot
+        "group": fileRoot.split('/').splice(1).join('-')
       };
 
       if (folders.indexOf(fileRoot) === -1) {

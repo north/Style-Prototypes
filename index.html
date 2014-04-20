@@ -10,26 +10,17 @@
   <base href="/">
 </head>
 <body>
-  <header ng-controller="GlobalHeader">
-    <nav role="navigation" data-sp-class="navigation">
-      <div menu="menu"></div>
-      <input type="search" ng-model="search.term" placeholder="Search" results='5' autosave='GlobalSearch' name='s' data-sp-class="navigation--search">
-    </nav>
-  </header>
-<!--
-  <header ng-controller="spYamlRead">
+  <div ng-controller="RootCtrl">
+    <header ng-controller="GlobalHeader">
+      <nav ng-if="show" role="navigation" data-sp-class="navigation">
+        <div menu="menu"></div>
+        <input type="search" ng-model="search.term" placeholder="Search" results='5' autosave='GlobalSearch' name='s' data-sp-class="navigation--search">
+      </nav>
+    </header>
 
-    <ul>
-      <li ng-repeat="cmpt in components.files | filter:search | orderBy:'name'">
-        <span ng-include="cmpt.path"></span>
-      </li>
-    </ul>
+    <main ng-view></main>
+  </div>
 
-  </header> -->
-
-  <main ng-view>
-
-  </main>
 
   <!-- build:js js/app.js -->
   <script src="bower_components/angular/angular.js"></script>

@@ -23,13 +23,13 @@
       scope: {
         item: '=menuItem'
       },
-      template: '<li><a data-sp-class="menu--link" href="{{item.href}}">{{item.title}}</a></li>',
-      link: function (scope, element, attrs) {
+      template: '<li><a data-sp-class="menu--link" ng-click="closeMenu()" href="{{item.href}}">{{item.title}}</a></li>',
+      link: function (scope, element) {
         if (scope.item.skip) {
           element[0].outerHTML = '';
         }
         else {
-          element.attr('data-sp-class', 'menu--item')
+          element.attr('data-sp-class', 'menu--item');
           if (scope.item.submenu) {
             element.attr('data-sp-class', 'menu--dropdown');
             var text = element.children('a').text();
@@ -40,7 +40,7 @@
                 $a.innerHTML = text;
             element.append($a);
 
-            var $submenu = document.createElement('div')
+            var $submenu = document.createElement('div');
                 $submenu.setAttribute('menu', 'item.submenu');
                 $submenu.setAttribute = ('data-sp-class', 'menu--inner');
             element.append($submenu);
@@ -48,11 +48,20 @@
         }
         $compile(element.contents())(scope);
 
+        scope.closeMenu = function () {
+          var activeNav = document.querySelectorAll('[data-sp-class="navigation"] [data-sp-state="active"]');
+          for (var i in activeNav) {
+            if (typeof(activeNav[i]) === 'object') {
+              activeNav[i].removeAttribute('data-sp-state');
+            }
+          }
+        }
+
         scope.openMenu = function () {
           if (element.attr('data-sp-state')) {
             element.removeAttr('data-sp-state');
             angular.forEach(element.children(), function (v, k) {
-                element.children()[k].removeAttribute('data-sp-state', 'active');
+                element.children()[k].removeAttribute('data-sp-state');
             });
           }
           else {
@@ -62,7 +71,7 @@
             });
           }
 
-        }
+        };
       }
     };
   }]);
@@ -79,12 +88,11 @@
       restrict: 'E',
       replace: true,
       template: '<span ng-include="getComponentUrl()"></span>',
-      link: function($scope, elem) {
+      link: function($scope, elem, attrs) {
         data.get().then(function (components) {
           $scope.components = components;
 
           $scope.getComponentUrl = function() {
-            console.log(elem);
             var component = attrs.name;
             // console.log(component);
             return data.find(component);

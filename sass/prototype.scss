@@ -209,7 +209,8 @@ $black: #3c3c3c;
   display: block;
   line-height: 1;
   padding: 1em;
-  transition: color .15s ease-out;
+  -webkit-transition: color .15s ease-out;
+          transition: color .15s ease-out;
 
   &:hover,
   &:focus {
@@ -252,7 +253,8 @@ $black: #3c3c3c;
   overflow: hidden;
   max-height: 0;
   min-width: 10em;
-  transition: max-height .1s ease-out;
+  -webkit-transition: max-height .1s ease-out;
+          transition: max-height .1s ease-out;
 
   &[data-sp-state="active"] {
     max-height: 120em;
@@ -305,16 +307,17 @@ $black: #3c3c3c;
   float: right;
   margin-top: .5em;
   // width: 5.5em;
-  transition: all .15s ease-in;
+  -webkit-transition: all .15s ease-in;
+          transition: all .15s ease-in;
 
   // padding: 2px;
   // border-radius: .5em;
   // background: rgba(#fff, .5);
   // border: none;
 
-  &:focus,
-  &:active {
-    width: 12em;
-    // background: #fff;
-  }
+  // &:focus,
+  // &:active {
+  //   width: 12em;
+  //   // background: #fff;
+  // }
 }
