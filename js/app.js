@@ -176,7 +176,7 @@
       get: function () {
         var promise = $q.defer();
 
-        $http.get('.www/data/components.json')
+        $http.get('data/components.json')
           .success(function (data) {
             components = data;
             ls.add('components', data);

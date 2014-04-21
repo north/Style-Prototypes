@@ -18,6 +18,11 @@ var filter = require('gulp-filter');
 var folderwalk = require('./exports.js').folderwalk;
 
 module.exports = function (gulp) {
+  gulp.task('bcc', function () {
+    gulp.src('bower_components/**/*')
+      .pipe(gulp.dest('.www/bower_components'));
+  })
+
   //////////////////////////////
   // Begin Gulp Tasks
   //////////////////////////////
@@ -27,7 +32,7 @@ module.exports = function (gulp) {
         '!' + paths.js + '/**/*.js'
       ])
       .pipe(jshint())
-      .pipe(jshint.reporter(stylish))
+      .pipe(jshint.reporter(stylish));
   });
 
   //////////////////////////////
@@ -36,7 +41,7 @@ module.exports = function (gulp) {
   gulp.task('compass', function () {
     return gulp.src(paths.sass + '/**/*')
       .pipe(shell([
-        'compass watch --time'
+        'compass watch --time --css-dir=.www/' + dirs.css
       ]));
   });
 
@@ -84,26 +89,14 @@ module.exports = function (gulp) {
       .pipe(jshint.reporter(stylish))
       .pipe(gulp.dest('.www/' + dirs.js));
 
-    watch({ glob: 'base/**/*.html'})
-      .pipe(folderwalk({
-        'base': 'base'
-      }))
-      .pipe(gulp.dest('.www/base'))
-      .pipe(browserSync.reload({stream: true}));
+    watch({ glob: dirs.img + '/**/*'})
+      .pipe(gulp.dest('.www/' + dirs.img));
 
-    watch({ glob: 'components/**/*.html'})
-      .pipe(folderwalk({
-        'base': 'components'
-      }))
-      .pipe(gulp.dest('.www/components'))
-      .pipe(browserSync.reload({stream: true}));
+    watch({ glob: '.www/' + dirs.fonts + '/**/*' })
+      .pipe(gulp.dest('.www/' + dirs.fonts));
 
-    watch({ glob: 'layouts/**/*.html'})
-      .pipe(folderwalk({
-        'base': 'layouts'
-      }))
-      .pipe(gulp.dest('.www/layouts'))
-      .pipe(browserSync.reload({stream: true}));
+    watch({ glob: 'index.html' })
+      .pipe(gulp.dest('.www/'));
   });
 
   gulp.task('walk', function () {
@@ -118,14 +111,14 @@ module.exports = function (gulp) {
   //////////////////////////////
   gulp.task('browserSync', function () {
     browserSync.init([
-      paths.css +  '/**/*.css',
-      paths.js + '/**/*.js',
-      paths.img + '/**/*',
-      paths.fonts + '/**/*',
-      paths.html + '/**/*.html',
+      '.www/' + dirs.css +  '/**/*.css',
+      '.www/' + dirs.js + '/**/*.js',
+      '.www/' + dirs.img + '/**/*',
+      '.www/' + dirs.fonts + '/**/*',
+      '.www/**/*.html',
     ], {
       server: {
-        baseDir: paths.html
+        baseDir: '.www'
       }
     });
   });
@@ -133,7 +126,7 @@ module.exports = function (gulp) {
   //////////////////////////////
   // Server Tasks
   //////////////////////////////
-  gulp.task('server', ['watch', 'compass', 'browserSync']);
+  gulp.task('server', ['watch', 'plugins', 'compass', 'browserSync']);
   gulp.task('serve', ['server']);
 
   //////////////////////////////
