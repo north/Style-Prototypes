@@ -5,6 +5,8 @@ var dirs = require('compass-options').dirs();
 var browserSync = require('browser-sync');
 var shell = require('gulp-shell');
 var subtree = require('gulp-subtree');
+var yaml = require('js-yaml');
+var fs = require('fs');
 
 
 
@@ -38,20 +40,44 @@ module.exports = function (gulp) {
       ]));
   });
 
-  gulp.task('walk', function () {
-    gulp.src('components/**/*.html')
-      .pipe(folderwalk({
-        'base': 'components'
-      }));
+  gulp.task('plugins', function () {
+    var sections = yaml.safeLoad(fs.readFileSync('./config/sections.yml', 'utf8'));
+
+    Object.keys(sections).forEach(function (k) {
+      var dest = '.www/partials/' + k;
+      if (!fs.existsSync('.www')) {
+        fs.mkdirSync('.www');
+      }
+      if (!fs.existsSync('.www/partials')) {
+        fs.mkdirSync('.www/partials');
+      }
+      if (!fs.existsSync(dest)) {
+        fs.mkdirSync(dest);
+      }
+
+      watch({ glob: k + '/**/*.html'})
+        .pipe(gulp.dest(dest))
+        .pipe(folderwalk({
+          'base': k
+        }));
+
+      if (sections[k].plugins) {
+        sections[k].plugins.forEach(function (p) {
+          gulp.src(p + '/**/*.html')
+            .pipe(gulp.dest(dest))
+            .pipe(folderwalk({
+              'base': k
+            }));
+        });
+      }
+
+    });
   });
 
   //////////////////////////////
   // Watch
   //////////////////////////////
   gulp.task('watch', function () {
-
-    watch({ glob: 'banana/**/*.html'})
-      .pipe(gulp.dest('.www/base'));
 
     watch({ glob: dirs.js + '/**/*.js' })
       .pipe(jshint())

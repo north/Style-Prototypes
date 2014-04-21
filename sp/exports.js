@@ -12,7 +12,7 @@ var util = require('util');
 var dirTree = function (filename) {
   var name = path.basename(filename);
 
-  if (name.charAt(0) === '.') {
+  if (name.charAt(0) === '.' || name === '') {
     return {
       skip: true,
       path: path.basename(filename)
@@ -20,7 +20,7 @@ var dirTree = function (filename) {
   }
   name = name.replace('.html', '');
 
-  var base = filename.replace(path.basename(filename), '').split('/')[0];
+  var base = filename.replace(path.basename(filename), '').split('/')[2];
 
   var menuName = name.replace(/--/g, '|&&|');
       menuName = menuName.replace(/-/g, ' ');
@@ -34,18 +34,17 @@ var dirTree = function (filename) {
 
   var group = filename.replace(path.basename(filename), '');
       group = group.split('/');
-      group = group.splice(1, group.length - 2);
+      group = group.splice(2, group.length - 2);
       group = group.join('-');
 
   if (stats.isDirectory()) {
-    group = filename.split('/').splice(1).join('-');
+    group = filename.split('/').splice(2).join('-');
 
     // info.type = "folder";
     info.submenu = fs.readdirSync(filename).map(function(child) {
       return dirTree(filename + '/' + child);
     });
 
-    // console.log(group);
 
     if (group === '') {
       info.submenu.push({
@@ -99,9 +98,10 @@ var folderwalk = function (options) {
 
     var base = options.base;
     var fileName = '.www/data/' + base + '.json';
+    var partials = '.www/partials/' + base;
     var files = [];
     var folders = [];
-    var walker = walk.walk(base);
+    var walker = walk.walk(partials);
 
     walker.on('file', function(root, stat, next) {
 
@@ -112,8 +112,9 @@ var folderwalk = function (options) {
           fileTitle = fileTitle.replace(/\|\&\&\|/g, ' - ');
           fileTitle = _s.titleize(fileTitle);
       var filePath = root + '/' + stat.name;
+          filePath = filePath.replace('.www/', '');
       var fileRoot = root.charAt(0) === '/' ? root.substr(1) : root;
-      var fileId = fileRoot.split('/').splice(1).join('-') + '--' + fileName;
+      var fileId = fileRoot.split('/').splice(2).join('-') + '--' + fileName;
           fileId = fileId.indexOf('--') === 0 ? fileId.substr(2) : fileId;
 
       var file = {
@@ -121,7 +122,7 @@ var folderwalk = function (options) {
         "title": fileTitle,
         "id": fileId,
         "path": filePath,
-        "group": fileRoot.split('/').splice(1).join('-')
+        "group": fileRoot.split('/').splice(2).join('-')
       };
 
       if (folders.indexOf(fileRoot) === -1) {
@@ -139,8 +140,7 @@ var folderwalk = function (options) {
 
       var build = {
         "files": files,
-        "folders": folders,
-        "menu": [dirTree(base)]
+        "menu": [dirTree(partials)]
       };
 
       jf.writeFile(fileName, build, function(err) {
