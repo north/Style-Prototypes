@@ -17,7 +17,15 @@ var filter = require('gulp-filter');
 
 var folderwalk = require('./exports.js').folderwalk;
 
+var yamlJSON = require('./yaml-json.js').yaml2json;
+
 module.exports = function (gulp) {
+  gulp.task('y2j', function () {
+    gulp.src('pages/style-tile.yml')
+      .pipe(yamlJSON())
+      .pipe(gulp.dest('.www/pages'));
+  });
+
   gulp.task('bcc', function () {
     gulp.src('bower_components/**/*')
       .pipe(gulp.dest('.www/bower_components'));
