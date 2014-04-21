@@ -7,7 +7,6 @@ var chalk = require('chalk');
 var fs = require('fs');
 var path = require('path');
 var _s = require ('underscore.string');
-var util = require('util');
 
 var dirTree = function (filename) {
   var name = path.basename(filename);
