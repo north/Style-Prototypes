@@ -34,11 +34,15 @@ var dirTree = function (filename) {
 
   var group = filename.replace(path.basename(filename), '');
       group = group.split('/');
-      group = group.splice(2, group.length - 2);
+      group = group.splice(3, group.length - 4);
+      // console.log(group);
+      // console.log('-------------');
       group = group.join('-');
 
   if (stats.isDirectory()) {
-    group = filename.split('/').splice(2).join('-');
+    group = filename.split('/').splice(3).join('-');
+    // console.log(group);
+    // console.log('-------------');
 
     // info.type = "folder";
     info.submenu = fs.readdirSync(filename).map(function(child) {
@@ -49,7 +53,7 @@ var dirTree = function (filename) {
     if (group === '') {
       info.submenu.push({
         title: 'View All',
-        href: '#/' + filename
+        href: '#/' + filename.split('/').splice(2).join('-')
       });
     }
     else {
@@ -65,6 +69,10 @@ var dirTree = function (filename) {
           path: path.basename(filename)
         };
     }
+
+    // console.log(group);
+    // console.log(name);
+    // console.log('-------------');
 
     var id = group + '--' + name;
         id = id.indexOf('--') === 0 ? id.substr(2) : id;
@@ -114,7 +122,7 @@ var folderwalk = function (options) {
       var filePath = root + '/' + stat.name;
           filePath = filePath.replace('.www/', '');
       var fileRoot = root.charAt(0) === '/' ? root.substr(1) : root;
-      var fileId = fileRoot.split('/').splice(2).join('-') + '--' + fileName;
+      var fileId = fileRoot.split('/').splice(3).join('-') + '--' + fileName;
           fileId = fileId.indexOf('--') === 0 ? fileId.substr(2) : fileId;
 
       var file = {
@@ -122,7 +130,7 @@ var folderwalk = function (options) {
         "title": fileTitle,
         "id": fileId,
         "path": filePath,
-        "group": fileRoot.split('/').splice(2).join('-')
+        "group": fileRoot.split('/').splice(3).join('-')
       };
 
       if (folders.indexOf(fileRoot) === -1) {
