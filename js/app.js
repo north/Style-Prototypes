@@ -18,7 +18,7 @@
         controller: 'StyleTileCtrl'
       })
       .when('/ish', {
-        template: '<div data-sp-id="viewport><div data-sp-id="viewport--cover"><iframe data-sp-id="viewport--window" src="{{url}}"></iframe><div data-sp-id="viewport--resize><div data-sp-id="viewport--resize-handle"></div></div></div></div>',
+        template: '<div data-sp-id="viewport"><div data-sp-id="viewport--cover"></div><div data-sp-id="viewport--container"><iframe data-sp-id="viewport--window" src="{{url}}"></iframe><div data-sp-id="viewport--resize"><div data-sp-id="viewport--resize-handle"></div></div></div></div>',
         controller: 'IshCtrl'
       })
       .when('/:view', {
@@ -46,7 +46,6 @@
 
   sp.controller('AllCtrl', ['$scope', '$routeParams', 'data', 'GlobalSearch', function ($scope, $routeParams, data, GlobalSearch) {
     $scope.search = GlobalSearch;
-    console.log($routeParams);
     data.get().then(function (components) {
       var comps = [];
 
@@ -70,9 +69,13 @@
     $scope.menu = {};
   }]);
 
-  sp.controller('GlobalHeader', ['$scope', 'data', 'GlobalSearch', '$location', function ($scope, data, GlobalSearch, $location) {
+  sp.controller('GlobalHeader', ['$scope', '$rootScope', 'data', 'GlobalSearch', '$location', function ($scope, $rootScope, data, GlobalSearch, $location) {
+
 
     $scope.show = $location.$$search.menu || true;
+    $scope.ish = $location.$$url === '/ish';
+
+    console.log($scope);
 
     data.get().then(function (components) {
       $scope.menu = components.menu;
@@ -89,6 +92,20 @@
         href: '#/ish'
       });
       $scope.search = GlobalSearch;
+    });
+
+    $rootScope.$on('$locationChangeStart', function (event, next, current) {
+      var location = next.split('/'),
+          index = location.indexOf('#');
+      if (location.length === index) {
+        $scope.ish = false;
+      }
+      else if (location[index + 1] === 'ish') {
+        $scope.ish = true;
+      }
+      else {
+        $scope.ish = false;
+      }
     });
   }]);
 
