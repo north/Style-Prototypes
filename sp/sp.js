@@ -64,7 +64,8 @@ module.exports = function (gulp) {
         .pipe(gulp.dest(dest))
         .pipe(folderwalk({
           'base': k
-        }));
+        }))
+        .pipe(browserSync.reload({stream:true}));
 
       if (sections[k].plugins) {
         sections[k].plugins.forEach(function (p) {
@@ -99,12 +100,12 @@ module.exports = function (gulp) {
       .pipe(gulp.dest('.www/'));
   });
 
-  gulp.task('walk', function () {
-    gulp.src('components')
-      .pipe(folderwalk({
-        'base': 'components'
-      }))
-  });
+  // gulp.task('walk', function () {
+  //   gulp.src('components')
+  //     .pipe(folderwalk({
+  //       'base': 'components'
+  //     }))
+  // });
 
   //////////////////////////////
   // BrowserSync Task
