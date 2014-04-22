@@ -91,8 +91,11 @@ var folderwalk = function (options) {
   if (!fs.existsSync('.www')) {
     fs.mkdirSync('.www');
   }
-  if (!fs.existsSync('.www/data')) {
-    fs.mkdirSync('.www/data');
+  if (!fs.existsSync('.tmp')) {
+    fs.mkdirSync('.tmp');
+  }
+  if (!fs.existsSync('.tmp/data')) {
+    fs.mkdirSync('.tmp/data');
   }
 
   return es.map(function (gulpFile, cb) {
@@ -104,7 +107,7 @@ var folderwalk = function (options) {
     }
 
     var base = options.base;
-    var fileName = '.www/data/' + base + '.json';
+    var fileName = '.tmp/data/' + base + '.json';
     var partials = '.www/partials/' + base;
     var files = [];
     var folders = [];
