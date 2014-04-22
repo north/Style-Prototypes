@@ -50,8 +50,9 @@
     $scope.url = window.location.protocol + '//' + window.location.host + '/#/?menu=false';
   }]);
 
-  sp.controller('AllCtrl', ['$scope', '$routeParams', 'data', 'GlobalSearch', function ($scope, $routeParams, data, GlobalSearch) {
+  sp.controller('AllCtrl', ['$scope', '$routeParams', 'data', 'sections', 'GlobalSearch', function ($scope, $routeParams, data, GlobalSearch) {
     $scope.search = GlobalSearch;
+
     data.get().then(function (components) {
       var comps = [];
 
@@ -75,7 +76,7 @@
     $scope.menu = {};
   }]);
 
-  sp.controller('GlobalHeader', ['$scope', '$rootScope', 'data', 'GlobalSearch', '$location', function ($scope, $rootScope, data, GlobalSearch, $location) {
+  sp.controller('GlobalHeader', ['$scope', '$rootScope', 'sections', 'GlobalSearch', '$location', function ($scope, $rootScope, sections, GlobalSearch, $location) {
 
 
     $scope.show = $location.$$search.menu || true;
@@ -83,20 +84,8 @@
 
     // console.log($scope);
 
-    data.get().then(function (components) {
-      $scope.menu = components.menu;
-      $scope.menu.push({
-        title: 'Style Tile',
-        href: '#/style-tile'
-      });
-      $scope.menu.push({
-        title: 'All',
-        href: '#/'
-      });
-      $scope.menu.push({
-        title: 'Ish',
-        href: '#/ish'
-      });
+    sections.menu().then(function (menu) {
+      $scope.menu = menu;
       $scope.search = GlobalSearch;
     });
 
@@ -125,25 +114,26 @@
   sp.controller('ComponentsCtrl', ['$scope', 'data', '$routeParams', '$location', 'GlobalSearch', function ($scope, data, $routeParams, $location, GlobalSearch) {
 
     $scope.search = GlobalSearch;
-    data.get().then(function (components) {
+
+    data.get($routeParams.view).then(function (components) {
       var display = [];
 
       if ($routeParams.id) {
-        for (var j in components.files) {
-          if (components.files[j].id === $routeParams.id) {
+        for (var j in components) {
+          if (components[j].id === $routeParams.id) {
             display.push(components.files[j]);
           }
         }
       }
       else if ($routeParams.group) {
-        for (var i in components.files) {
-          if (components.files[i].group.indexOf($routeParams.group) === 0) {
-            display.push(components.files[i]);
+        for (var i in components) {
+          if (components[i].group.indexOf($routeParams.group) === 0) {
+            display.push(components[i]);
           }
         }
       }
       else {
-        display = components.files;
+        display = components;
       }
 
       $scope.components = display;

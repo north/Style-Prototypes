@@ -19,11 +19,20 @@ var folderwalk = require('./exports.js').folderwalk;
 
 var yamlJSON = require('./yaml-json.js').yaml2json;
 
+var buildMenu = require('./menu.js').buildMenu;
+
 module.exports = function (gulp) {
   gulp.task('y2j', function () {
     gulp.src('pages/style-tile.yml')
       .pipe(yamlJSON())
-      .pipe(gulp.dest('.www/pages'));
+      .pipe(gulp.dest('.www/pages'))
+      .pipe(browserSync.reload({stream:true}));
+
+    gulp.src('config/sections.yml')
+      .pipe(yamlJSON())
+      .pipe(gulp.dest('.www/config'))
+      .pipe(buildMenu())
+      .pipe(browserSync.reload({stream:true}));
   });
 
   gulp.task('bcc', function () {

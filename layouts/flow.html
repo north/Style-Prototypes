@@ -1,0 +1,11 @@
+<div class="flow">
+  <div class="flow--jumbotron">
+    <component ng-if="jumbotron" data-name="jumbotron.name" data-source="jumbotron.source"></component>
+  </div>
+  <div class="flow--main">
+    <component class="flow--item" ng-repeat="item in flow_items" data-name="item.name" data-source="item.source"></component>
+  </div>
+  <div class="flow--aside">
+    <component ng-repeat="item in aside_items" data-name="item.name" data-source="item.source"></component>
+  </div>
+</div>

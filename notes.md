@@ -113,3 +113,56 @@ sections:
 * JS and CSS as Bower Plugin
 * index.html/ish.html and folder structure setup as Yeoman generator
 * Ish as path in index.html? I think it's do-able.
+
+## Mason
+
+YML file to inject options into scope
+One for each folder, plus pages yml.
+
+Layout - Full layout, scope options for compositions
+Page: Listing of components to use
+Come with Grey Box component, source Style Prototypes
+
+(layout)
+```flow.yml
+flow:
+	jumbotron:
+		name: placeholder
+		source: style-prototypes
+	flow-items:
+		item-1:
+			name: placeholder
+			source: style-prototypes
+		item-2
+			name: placeholder
+			source: style-prototypes
+	aside-item:
+		item-1:
+			name: placeholder
+			source: style-prototypes
+```
+
+(page)
+```about.yml
+template:
+	name: flow
+	source: layout
+flow:
+	jumbotron:
+		name: leaderboard--16x9
+		source: components
+	flow-items:
+		item-1:
+			name: placeholder
+			source: style-prototypes
+		item-2
+			name: placeholder
+			source: style-prototypes
+	aside-item:
+		item-1:
+			name: placeholder
+			source: style-prototypes
+content:
+	image: images/foo.jpg
+	header: Hello World
+```
