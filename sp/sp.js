@@ -7,8 +7,7 @@ var shell = require('gulp-shell');
 var subtree = require('gulp-subtree');
 var yaml = require('js-yaml');
 var fs = require('fs');
-
-
+var clean = require('gulp-clean');
 
 var watch = require('gulp-watch');
 var plumber = require('gulp-plumber');
@@ -16,10 +15,9 @@ var filter = require('gulp-filter');
 
 
 var folderwalk = require('./exports.js').folderwalk;
-
 var yamlJSON = require('./yaml-json.js').yaml2json;
-
 var buildMenu = require('./menu.js').buildMenu;
+var maid = require('./maid.js').maid;
 
 module.exports = function (gulp) {
   gulp.task('y2j', function () {
@@ -62,7 +60,10 @@ module.exports = function (gulp) {
       ]));
   });
 
-  gulp.task('plugins', function () {
+  //////////////////////////////
+  // Copies the partials over
+  //////////////////////////////
+  gulp.task('components', function () {
     var sections = yaml.safeLoad(fs.readFileSync('./config/sections.yml', 'utf8'));
 
     Object.keys(sections).forEach(function (k) {
@@ -78,23 +79,22 @@ module.exports = function (gulp) {
       }
 
       watch({ glob: k + '/**/*.html'})
-        .pipe(gulp.dest(dest))
+        .pipe(plumber())
+        .pipe(maid({folder: k}))
         .pipe(folderwalk({
           'base': k
         }))
         .pipe(browserSync.reload({stream:true}));
-
-      if (sections[k].plugins) {
-        sections[k].plugins.forEach(function (p) {
-          gulp.src(p + '/**/*.html')
-            .pipe(gulp.dest(dest))
-            .pipe(folderwalk({
-              'base': k
-            }));
-        });
-      }
-
     });
+  });
+
+  //////////////////////////////
+  // Watches for changes to the tmp data and rebuilds the menus and files
+  //////////////////////////////
+  gulp.task('data', function () {
+    watch({ glob: '.tmp/data/*.json'})
+      .pipe(buildMenu())
+      .pipe(browserSync.reload({stream:true}));
   });
 
   //////////////////////////////
@@ -144,7 +144,7 @@ module.exports = function (gulp) {
   //////////////////////////////
   // Server Tasks
   //////////////////////////////
-  gulp.task('server', ['watch', 'plugins', 'compass', 'browserSync']);
+  gulp.task('server', ['watch', 'components', 'data', 'compass', 'browserSync']);
   gulp.task('serve', ['server']);
 
   //////////////////////////////
