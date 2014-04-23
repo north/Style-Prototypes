@@ -15,17 +15,24 @@ module.exports.maid = function (options) {
       gutil.log('埽', 'The Maid has cleaned');
     }
 
+    // Make Partial folder
     fs.mkdirSync('.www/partials/' + folder);
-    fs.copySync(folder, '.www/partials/' + folder);
-    gutil.log('埽', 'The Maid has updated the files');
 
-
+    // Import Plugins
     if (sections[folder].plugins) {
       sections[folder].plugins.forEach(function (p) {
         fs.copySync(p, '.www/partials/' + folder)
       });
       gutil.log('埽', 'The Maid has replaced the plugins');
     }
+
+    // Import User Files
+    // (do this second so user versions take precedence)
+    fs.copySync(folder, '.www/partials/' + folder);
+    gutil.log('埽', 'The Maid has updated the files');
+
+
+
 
     return cb(null, gulpFile);
   });
