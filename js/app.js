@@ -9,6 +9,9 @@
     'LocalStorageModule'
   ]);
 
+  //////////////////////////////
+  // Route Configuration
+  //////////////////////////////
   sp.config(['$routeProvider', function ($routeProvider) {
 
     var $injector = angular.injector(['spTemplates']);
@@ -16,7 +19,7 @@
 
     $routeProvider
       .when('/', {
-        template: '<h1 ng-if=\"components\" data-sp-class=\"section--header\">Components</h1><ul><li ng-repeat="cmpt in components | filter:search.term | orderBy:\'id\'" data-sp-class="section--group"><h2 id="{{cmpt.id}}" data-sp-class=\"section--header\"><a href="#/?id={{cmpt.id}}">{{cmpt.name}}</a></h2><span ng-include="cmpt.path"></span></li></ul>',
+        template: templates.all(),
         controller: 'AllCtrl'
       })
       .when('/style-tile', {
@@ -46,38 +49,11 @@
     };
   });
 
-  sp.controller('IshCtrl', ['$scope', function ($scope) {
-    $scope.url = window.location.protocol + '//' + window.location.host + '/#/?menu=false';
-  }]);
 
-  sp.controller('AllCtrl', ['$scope', '$routeParams', 'data', 'sections', 'GlobalSearch', function ($scope, $routeParams, data, GlobalSearch) {
-    $scope.search = GlobalSearch;
-
-    data.get().then(function (components) {
-      var comps = [];
-
-      if ($routeParams.id) {
-        angular.forEach(components.files, function (v, k) {
-          if (v.id === $routeParams.id) {
-            comps.push(components.files[k]);
-          }
-        });
-      }
-      else {
-        comps = components.files;
-      }
-
-
-      $scope.components = comps;
-    });
-  }]);
-
-  sp.controller('RootCtrl', ['$scope', function ($scope) {
-    $scope.menu = {};
-  }]);
-
+  //////////////////////////////
+  // Global Header Controller
+  //////////////////////////////
   sp.controller('GlobalHeader', ['$scope', '$rootScope', 'sections', 'GlobalSearch', '$location', function ($scope, $rootScope, sections, GlobalSearch, $location) {
-
 
     $scope.show = $location.$$search.menu || true;
     $scope.ish = $location.$$url === '/ish';
@@ -104,13 +80,37 @@
     });
   }]);
 
-  sp.controller('StyleTileCtrl', ['$scope', '$http', function ($scope, $http) {
-    $http.get('pages/style-tile.json')
-      .success(function (styleTile) {
-        $scope.tile = styleTile;
+  //////////////////////////////
+  // All View Controller
+  //////////////////////////////
+  sp.controller('AllCtrl', ['$scope', '$routeParams', 'data', 'GlobalSearch', function ($scope, $routeParams, data, GlobalSearch) {
+    $scope.search = GlobalSearch;
+
+    data.get().then(function (components) {
+      var comps = {};
+
+      angular.forEach(components, function (v, k) {
+        v.forEach(function (c) {
+          if (c.id === $routeParams.id) {
+            if (typeof(comps[k]) !== 'array') {
+              comps[k] = [];
+            }
+            comps[k].push(c);
+          }
+        });
       });
+
+      if (Object.keys(comps).length === 0) {
+        comps = components;
+      }
+
+      $scope.components = comps;
+    });
   }]);
 
+  //////////////////////////////
+  // Individual Component Controller
+  //////////////////////////////
   sp.controller('ComponentsCtrl', ['$scope', 'data', '$routeParams', '$location', 'GlobalSearch', function ($scope, data, $routeParams, $location, GlobalSearch) {
 
     $scope.search = GlobalSearch;
@@ -121,7 +121,7 @@
       if ($routeParams.id) {
         for (var j in components) {
           if (components[j].id === $routeParams.id) {
-            display.push(components.files[j]);
+            display.push(components[j]);
           }
         }
       }
@@ -154,9 +154,24 @@
           $scope.search = event.data;
         });
       }, false);
-
-
     });
   }]);
 
-})(window.angular, window.jsyaml);
+  //////////////////////////////
+  // Style Tile Controller
+  //////////////////////////////
+  sp.controller('StyleTileCtrl', ['$scope', '$http', function ($scope, $http) {
+    $http.get('pages/style-tile.json')
+      .success(function (styleTile) {
+        $scope.tile = styleTile;
+      });
+  }]);
+
+  //////////////////////////////
+  // Ish Controller
+  //////////////////////////////
+  sp.controller('IshCtrl', ['$scope', function ($scope) {
+    $scope.url = window.location.protocol + '//' + window.location.host + '/#/?menu=false';
+  }]);
+
+})(window.angular);

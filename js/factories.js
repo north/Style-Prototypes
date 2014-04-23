@@ -13,7 +13,6 @@
 
   spFact.factory('sections', ['$http', '$q', 'localStorageService', function ($http, $q, ls){
     var sections = ls.get('sections');
-    var items = ls.get('items');
     var menu = ls.get('menu');
 
     return {
@@ -28,17 +27,6 @@
             promise.resolve(data);
           })
 
-        return promise.promise;
-      },
-      data: function (name) {
-        var promise = $q.defer();
-        $http.get('data/' + k + '.json')
-          .success(function (i) {
-            promise.resolve(i);
-          })
-          .error(function (e) {
-            promise.resolve(null);
-          });
         return promise.promise;
       },
       menu: function () {
@@ -84,11 +72,19 @@
       get: function (view) {
         var promise = $q.defer();
 
-        $http.get('data/' + view + '.json')
+        $http.get('config/files.json')
           .success(function (data) {
-            components = data.files;
-            ls.add('components', data.files);
-            promise.resolve(data.files);
+            ls.add('components', data);
+
+            components = data;
+
+            if (view) {
+              promise.resolve(components[view]);
+            }
+            else {
+              promise.resolve(components);
+            }
+
           });
         return promise.promise;
       },

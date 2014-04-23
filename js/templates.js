@@ -7,6 +7,9 @@
 
   spTemplates.factory('templates', function (){
     return {
+      all: function () {
+        return '<div ng-repeat="(section, items) in components"><h1 data-sp-class="section--header"><a href="#/{{section}}">{{section}}</a></h1><ul><li ng-repeat="cmpt in items  | filter:search.term | orderBy:\'id\'" data-sp-class="section--group"><h2 id="{{cmpt.id}}" data-sp-class=\"section--header\"><a href="#/?id={{cmpt.id}}">{{cmpt.name}}</a></h2><span ng-include="cmpt.path"></span></li></ul></div>';
+      },
       components: function () {
         return '<ul><li ng-repeat="cmpt in components | filter:search.term | orderBy:\'id\'" data-sp-class="section--group"><h2 id="{{cmpt.id}}" data-sp-class=\"section--header\"><a id="{{cmpt.id}}" href="#/?id={{cmpt.id}}" ng-click="updateId($event)">{{cmpt.name}}</a></h2><span ng-include="cmpt.path"></span></li></ul>';
       },
