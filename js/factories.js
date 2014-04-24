@@ -91,7 +91,7 @@
       },
       scope: function (view) {
         var promise = $q.defer();
-        $http.get('config/scope.json')
+        $http.get('config/scopes.json')
           .success(function (data) {
             ls.add('scopes', data);
             scopes = data;
