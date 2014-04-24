@@ -90,20 +90,20 @@
   spDir.directive('component',['data', function (data) {
     return {
       scope: {
-        name: '=',
-        aspect: '='
+        name: '@name',
+        source: '@source'
       },
       restrict: 'E',
       replace: true,
       template: '<span ng-include="getComponentUrl()"></span>',
       link: function($scope, elem, attrs) {
-        data.get().then(function (components) {
-          $scope.components = components;
-
+        data.get(attrs.source).then(function (components) {
           $scope.getComponentUrl = function() {
-            var component = attrs.name;
-            // console.log(component);
-            return data.find(component);
+            for (var i in components) {
+              if (components[i].name === attrs.name) {
+                return components[i].path;
+              }
+            }
           };
         });
       }
