@@ -62,7 +62,7 @@
 
     sections.menu().then(function (menu) {
       $scope.menu = menu;
-      $scope.search = GlobalSearch;
+      $scope.StylePrototypeSearch = GlobalSearch;
     });
 
     $rootScope.$on('$locationChangeStart', function (event, next, current) {
@@ -84,7 +84,7 @@
   // All View Controller
   //////////////////////////////
   sp.controller('AllCtrl', ['$scope', '$routeParams', 'data', 'GlobalSearch', function ($scope, $routeParams, data, GlobalSearch) {
-    $scope.search = GlobalSearch;
+    $scope.StylePrototypeSearch = GlobalSearch;
 
     data.get().then(function (components) {
       var comps = {};
@@ -104,7 +104,7 @@
         comps = components;
       }
 
-      $scope.components = comps;
+      $scope.StylePrototypeComponents = comps;
     });
   }]);
 
@@ -113,8 +113,20 @@
   //////////////////////////////
   sp.controller('ComponentsCtrl', ['$scope', 'data', '$routeParams', '$location', 'GlobalSearch', function ($scope, data, $routeParams, $location, GlobalSearch) {
 
-    $scope.search = GlobalSearch;
+    $scope.StylePrototypeSearch = GlobalSearch;
 
+    //////////////////////////////
+    // Set Scope
+    //////////////////////////////
+    data.scope($routeParams.view).then(function (scope) {
+      if (scope) {
+        $scope[$routeParams.view] = scope;
+      }
+    });
+
+    //////////////////////////////
+    // Get Components
+    //////////////////////////////
     data.get($routeParams.view).then(function (components) {
       var display = [];
 
@@ -136,7 +148,7 @@
         display = components;
       }
 
-      $scope.components = display;
+      $scope.StylePrototypeComponents = display;
 
       $scope.updateId = function ($event) {
         $event.preventDefault();
@@ -151,7 +163,7 @@
         }
         console.log(event.data);
         $scope.$apply(function () {
-          $scope.search = event.data;
+          $scope.StylePrototypeSearch = event.data;
         });
       }, false);
     });
@@ -163,7 +175,7 @@
   sp.controller('StyleTileCtrl', ['$scope', '$http', function ($scope, $http) {
     $http.get('pages/style-tile.json')
       .success(function (styleTile) {
-        $scope.tile = styleTile;
+        $scope.StylePrototypeStyleTile = styleTile;
       });
   }]);
 

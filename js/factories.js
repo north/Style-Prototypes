@@ -67,6 +67,7 @@
 
   spFact.factory('data', ['$http', '$q', 'localStorageService', function ($http, $q, ls) {
     var components = ls.get('components');
+    var scopes = ls.get('scopes');
 
     return {
       get: function (view) {
@@ -85,6 +86,22 @@
               promise.resolve(components);
             }
 
+          });
+        return promise.promise;
+      },
+      scope: function (view) {
+        var promise = $q.defer();
+        $http.get('config/scope.json')
+          .success(function (data) {
+            ls.add('scopes', data);
+            scopes = data;
+
+            if (view) {
+              promise.resolve(scopes[view]);
+            }
+            else {
+              promise.resolve(scopes);
+            }
           });
         return promise.promise;
       },
