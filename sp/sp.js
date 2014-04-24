@@ -16,6 +16,7 @@ var filter = require('gulp-filter');
 
 var folderwalk = require('./exports.js').folderwalk;
 var yamlJSON = require('./yaml-json.js').yaml2json;
+var buildScope = require('./menu.js').buildScope;
 var buildMenu = require('./menu.js').buildMenu;
 var maid = require('./maid.js').maid;
 
@@ -78,12 +79,19 @@ module.exports = function (gulp) {
         fs.mkdirSync(dest);
       }
 
-      watch({ glob: k + '/**/*.html'})
+      watch({ glob: k + '/**/*.html' })
         .pipe(plumber())
         .pipe(maid({folder: k}))
         .pipe(folderwalk({
           'base': k
         }))
+        .pipe(browserSync.reload({stream:true}));
+
+      watch({ glob: k + '/**/*.yml' })
+        .pipe(plumber())
+        .pipe(yamlJSON())
+        .pipe(gulp.dest('.tmp/scopes'))
+        .pipe(buildScope())
         .pipe(browserSync.reload({stream:true}));
     });
   });

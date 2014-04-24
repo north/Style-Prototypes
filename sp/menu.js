@@ -32,3 +32,29 @@ module.exports.buildMenu = function (options) {
     return cb(null, gulpFile);
   });
 }
+
+module.exports.buildScope = function (options) {
+  return es.map(function (gulpFile, cb) {
+    var sections = Object.keys(jf.readFileSync('.www/config/sections.json'));
+
+    var scopes = {};
+
+    sections.forEach(function (k) {
+      var path = '.tmp/scopes/' + k + '.json';
+      if (fs.existsSync(path)) {
+        try {
+          var data = jf.readFileSync(path);
+          scopes[k] = data[k];
+        }
+        catch (e) {
+          console.log(e);
+        }
+      }
+    });
+
+    jf.writeFileSync('.www/config/scopes.json', scopes);
+    gutil.log('Updated Scopes');
+
+    return cb(null, gulpFile);
+  });
+}
