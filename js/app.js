@@ -86,6 +86,21 @@
   sp.controller('AllCtrl', ['$scope', '$routeParams', 'data', 'GlobalSearch', function ($scope, $routeParams, data, GlobalSearch) {
     $scope.StylePrototypeSearch = GlobalSearch;
 
+    //////////////////////////////
+    // Set Scope
+    //////////////////////////////
+    data.scope().then(function (scope) {
+      if (scope) {
+        for (var i in scope) {
+          $scope[i] = scope[i];
+        }
+      }
+      console.log($scope);
+    });
+
+    //////////////////////////////
+    // Set Components
+    //////////////////////////////
     data.get().then(function (components) {
       var comps = {};
 
@@ -125,7 +140,7 @@
     });
 
     //////////////////////////////
-    // Get Components
+    // Set Components
     //////////////////////////////
     data.get($routeParams.view).then(function (components) {
       var display = [];
