@@ -1,0 +1,21 @@
+template:
+  name: flow
+  source: layout
+flow:
+  jumbotron:
+    name: leaderboard--16x9
+    source: components
+  flow-items:
+    item-1:
+      name: placeholder
+      source: style-prototypes
+    item-2:
+      name: placeholder
+      source: style-prototypes
+  aside-item:
+    item-1:
+      name: placeholder
+      source: style-prototypes
+content:
+  image: images/foo.jpg
+  header: Hello World
