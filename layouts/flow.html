@@ -3,9 +3,8 @@
     <img src="{{layouts.jumbotron.image}}" alt="{{layouts.jumbotron.title}}">
   </div>
   <div class="flow--main">
-    <component class="flow--item" ng-repeat="item in flow_items" data-name="item.name" data-source="item.source"></component>
   </div>
   <div class="flow--aside">
-    <component ng-repeat="item in aside_items" data-name="item.name" data-source="item.source"></component>
+    <component ng-repeat="item in layouts.aside_items" data-name="{{item.name}}" data-source="{{item.source}}"></component>
   </div>
 </div>
