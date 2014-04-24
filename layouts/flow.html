@@ -1,6 +1,6 @@
 <div class="flow">
   <div class="flow--jumbotron">
-    <component ng-if="jumbotron" data-name="jumbotron.name" data-source="jumbotron.source"></component>
+    <img src="{{layouts.jumbotron.image}}" alt="{{layouts.jumbotron.title}}">
   </div>
   <div class="flow--main">
     <component class="flow--item" ng-repeat="item in flow_items" data-name="item.name" data-source="item.source"></component>

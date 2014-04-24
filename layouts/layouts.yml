@@ -1,0 +1,5 @@
+layouts:
+  jumbotron:
+    image: http://www.fillmurray.com/300/200
+    title: Cool Grey Murray
+  foo: bar
