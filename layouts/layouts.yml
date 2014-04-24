@@ -2,4 +2,13 @@ layouts:
   jumbotron:
     image: http://www.fillmurray.com/300/200
     title: Cool Grey Murray
-  foo: bar
+  aside_items:
+    item-1:
+      name: foo
+      source: components
+    item-2:
+      name: message--warning
+      source: components
+    item-3:
+      name: base
+      source: base
