@@ -53,7 +53,7 @@
   //////////////////////////////
   // Global Header Controller
   //////////////////////////////
-  sp.controller('GlobalHeader', ['$scope', '$rootScope', 'sections', 'GlobalSearch', '$location', function ($scope, $rootScope, sections, GlobalSearch, $location) {
+  sp.controller('GlobalHeader', ['$scope', '$rootScope', '$timeout', 'sections', 'GlobalSearch', '$location', function ($scope, $rootScope, $timeout, sections, GlobalSearch, $location) {
 
     $scope.show = $location.$$search.menu || true;
     $scope.ish = $location.$$url === '/ish';
@@ -64,6 +64,15 @@
       $scope.menu = menu;
       $scope.StylePrototypeSearch = GlobalSearch;
     });
+
+    $timeout(function () {
+      if ('complete' === document.readyState) {
+        var dcl = document.createEvent('Event');
+        dcl.initEvent('DOMContentLoaded', true, true);
+        window.document.dispatchEvent(dcl);
+      }
+    }, 200);
+
 
     $rootScope.$on('$locationChangeStart', function (event, next, current) {
       var location = next.split('/'),
@@ -78,6 +87,16 @@
         $scope.ish = false;
       }
     });
+
+    $rootScope.$on('$routeChangeSuccess', function () {
+      $timeout(function () {
+        if ('complete' === document.readyState) {
+          var dcl = document.createEvent('Event');
+          dcl.initEvent('DOMContentLoaded', true, true);
+          window.document.dispatchEvent(dcl);
+        }
+      }, 100);
+    })
   }]);
 
   //////////////////////////////
