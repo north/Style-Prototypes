@@ -278,9 +278,11 @@ $black: #3c3c3c;
   background: #222222;
   height: 2.2em;
   margin-bottom: .75em;
+  position: relative;
   @extend %sp-class-clearfix;
 
   > [data-sp-class="menu"] {
+    top: 0;
     > [data-sp-class="menu--item"],
     > [data-sp-class="menu--dropdown"] {
       display: inline-block;
