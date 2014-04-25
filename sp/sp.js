@@ -18,9 +18,19 @@ var folderwalk = require('./exports.js').folderwalk;
 var yamlJSON = require('./yaml-json.js').yaml2json;
 var buildScope = require('./menu.js').buildScope;
 var buildMenu = require('./menu.js').buildMenu;
+var pagewalk = require('./pages.js').pagewalk;
 var maid = require('./maid.js').maid;
 
 module.exports = function (gulp) {
+  gulp.task('pages', function () {
+    gulp.src('pages/**/*.yml')
+      .pipe(plumber())
+      .pipe(yamlJSON())
+      .pipe(gulp.dest('.tmp/pages'))
+      .pipe(pagewalk())
+      .pipe(browserSync.reload({stream:true}));
+  });
+
   gulp.task('y2j', function () {
     gulp.src('pages/style-tile.yml')
       .pipe(yamlJSON())
@@ -94,6 +104,12 @@ module.exports = function (gulp) {
         .pipe(buildScope())
         .pipe(browserSync.reload({stream:true}));
     });
+
+    watch({ glob: 'pages/**/*.yml' })
+      .pipe(plumber())
+      .pipe(yamlJSON())
+      .pipe(gulp.dest('.tmp/pages'))
+      .pipe(browserSync.reload({stream:true}));
   });
 
   //////////////////////////////
