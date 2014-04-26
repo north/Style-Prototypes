@@ -32,10 +32,10 @@ module.exports = function (gulp) {
   });
 
   gulp.task('y2j', function () {
-    gulp.src('pages/style-tile.yml')
-      .pipe(yamlJSON())
-      .pipe(gulp.dest('.www/pages'))
-      .pipe(browserSync.reload({stream:true}));
+    // gulp.src('pages/style-tile.yml')
+    //   .pipe(yamlJSON())
+    //   .pipe(gulp.dest('.www/pages'))
+    //   .pipe(browserSync.reload({stream:true}));
 
     gulp.src('config/sections.yml')
       .pipe(yamlJSON())
@@ -109,6 +109,8 @@ module.exports = function (gulp) {
       .pipe(plumber())
       .pipe(yamlJSON())
       .pipe(gulp.dest('.tmp/pages'))
+      .pipe(pagewalk())
+      .pipe(buildMenu())
       .pipe(browserSync.reload({stream:true}));
   });
 

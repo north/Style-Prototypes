@@ -19,6 +19,7 @@ var dirTree = function (filename) {
   }
   name = name.replace('.json', '');
 
+  console.log(filename);
   var base = filename.replace(path.basename(filename), '').split('/')[2];
 
   var menuName = name.replace(/--/g, '|&&|');
@@ -91,6 +92,9 @@ var pagewalk = function (options) {
     var folders = [];
     var walker = walk.walk(partials);
 
+    var fileConfig = jf.readFileSync('.www/config/files.json');
+    // console.log(partials);
+
     walker.on('file', function(root, stat, next) {
 
       var fileName = stat.name;
@@ -106,11 +110,29 @@ var pagewalk = function (options) {
           fileId = fileId.indexOf('--') === 0 ? fileId.substr(2) : fileId;
       var settings = jf.readFileSync(root + '/' + stat.name);
 
+      var includes = [];
+      if (settings && settings.includes) {
+        for (var i in settings.includes) {
+          var inc = settings.includes[i];
+          if (fileConfig[inc.source]) {
+            for (var j in fileConfig[inc.source]) {
+              if (fileConfig[inc.source][j]) {
+                if (fileConfig[inc.source][j].id === inc.name) {
+                  includes.push(fileConfig[inc.source][j].path);
+                }
+              }
+            }
+          }
+        }
+      }
+
+
       var file = {
         "name": fileName,
         "title": fileTitle,
         "id": fileId,
-        "settings": settings,
+        "includes": includes,
+        "overrides": settings && settings.overrides ? settings.overrides : [],
         "group": fileRoot.split('/').splice(3).join('-')
       };
 

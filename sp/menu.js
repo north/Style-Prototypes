@@ -8,6 +8,7 @@ var fs = require('fs');
 module.exports.buildMenu = function (options) {
   return es.map(function (gulpFile, cb) {
     var sections = Object.keys(jf.readFileSync('.www/config/sections.json'));
+        sections.push('pages');
 
     var menu = [];
     var files = {};

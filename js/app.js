@@ -1,5 +1,17 @@
-(function (angular, yaml) {
+(function (angular) {
   'use strict';
+
+  function extend (target, source) {
+    target = target || {};
+    for (var prop in source) {
+      if (typeof source[prop] === 'object') {
+        target[prop] = extend(target[prop], source[prop]);
+      } else {
+        target[prop] = source[prop];
+      }
+    }
+    return target;
+  }
 
   var sp = angular.module('StylePrototype', [
     'ngRoute',
@@ -29,6 +41,10 @@
       .when('/ish', {
         template: templates.ish(),
         controller: 'IshCtrl'
+      })
+      .when('/pages', {
+        template: templates.pages(),
+        controller: 'PagesCtrl'
       })
       .when('/:view', {
         template: templates.components(),
@@ -71,7 +87,7 @@
         dcl.initEvent('DOMContentLoaded', true, true);
         window.document.dispatchEvent(dcl);
       }
-    }, 200);
+    }, 1000);
 
 
     $rootScope.$on('$locationChangeStart', function (event, next, current) {
@@ -114,7 +130,7 @@
           $scope[i] = scope[i];
         }
       }
-      console.log($scope);
+      // console.log($scope);
     });
 
     //////////////////////////////
@@ -124,21 +140,65 @@
       var comps = {};
 
       angular.forEach(components, function (v, k) {
-        v.forEach(function (c) {
-          if (c.id === $routeParams.id) {
-            if (typeof(comps[k]) !== 'array') {
-              comps[k] = [];
+        if (k !== 'pages') {
+          v.forEach(function (c) {
+            if (c.id === $routeParams.id) {
+              if (typeof(comps[k]) !== 'array') {
+                comps[k] = [];
+              }
+              comps[k].push(c);
             }
-            comps[k].push(c);
-          }
-        });
+          });
+        }
       });
 
       if (Object.keys(comps).length === 0) {
         comps = components;
+        delete comps.pages;
       }
 
       $scope.StylePrototypeComponents = comps;
+    });
+  }]);
+
+  //////////////////////////////
+  // Pages Controller
+  //////////////////////////////
+  sp.controller('PagesCtrl', ['$scope', 'data', '$routeParams', '$location', 'GlobalSearch', function ($scope, data, $routeParams, $location, GlobalSearch) {
+
+    $scope.StylePrototypeSearch = GlobalSearch;
+
+    //////////////////////////////
+    // Set Components
+    //////////////////////////////
+    data.get('pages').then(function (components) {
+      var display = [];
+
+      if ($routeParams.id) {
+        for (var j in components) {
+          if (components[j].id === $routeParams.id) {
+            display.push(components[j]);
+          }
+        }
+      }
+      else {
+        display = components;
+      }
+
+      //////////////////////////////
+      // Set Scope
+      //////////////////////////////
+      data.scope().then(function (scope) {
+        angular.forEach(scope, function (v, k) {
+          $scope[k] = v;
+        });
+
+        angular.forEach(display[0].overrides, function (v, k) {
+          $scope[k] = extend($scope[k], v);
+        });
+
+        $scope.StylePrototypeIncludes = display[0].includes;
+      });
     });
   }]);
 
@@ -183,6 +243,8 @@
       }
 
       $scope.StylePrototypeComponents = display;
+
+      console.log($routeParams.view);
 
       $scope.updateId = function ($event) {
         $event.preventDefault();
