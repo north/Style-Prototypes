@@ -2,6 +2,5 @@
 bower_components/
 node_modules/
 vendor/
-css/
 .www
 .tmp
