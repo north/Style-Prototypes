@@ -1,6 +1,6 @@
 {
   "name": "style-prototype",
-  "version": "2.0.0-alpha.1",
+  "version": "2.0.0-alpha.2",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -8,7 +8,10 @@
     "test",
     "tests",
     "Gulpfile.js",
-    "package.json"
+    "package.json",
+    "Gemfile",
+    "Gemfile.lock",
+    "config.rb"
   ],
   "dependencies": {
     "angular": "~1.2.16",
