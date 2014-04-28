@@ -6,7 +6,9 @@
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    "Gulpfile.js",
+    "package.json"
   ],
   "dependencies": {
     "angular": "~1.2.16",
