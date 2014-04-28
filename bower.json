@@ -1,6 +1,6 @@
 {
-  "name": "style-prototypes",
-  "version": "0.0.0",
+  "name": "style-prototype",
+  "version": "2.0.0-alpha.1",
   "ignore": [
     "**/.*",
     "node_modules",
