@@ -1,5 +1,5 @@
 {
-  "name": "gulp",
+  "name": "style-prototypes",
   "version": "0.0.0",
   "ignore": [
     "**/.*",
@@ -9,16 +9,8 @@
     "tests"
   ],
   "dependencies": {
-    "eq.js": "~1.4.1",
-    "borealis": "~1.0.1",
-    "js-yaml": "~3.0.2",
     "angular": "~1.2.16",
-    "jquery": "~2.1.0",
     "angular-local-storage": "~0.0.1",
-    "ish": "git@github.com:Snugug/ish.git",
     "angular-route": "~1.2.16"
-  },
-  "devDependencies": {
-    "north": "~0.2.0"
   }
 }

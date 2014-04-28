@@ -1,29 +1,9 @@
 {
-  "name": "gulp",
+  "name": "Style-Prototypes",
   "version": "0.0.0",
-  "dependencies": {
-    "js-yaml": "^3.0.2",
-    "fs-extra": "^0.8.1"
-  },
   "devDependencies": {
     "gulp": "^3.6.0",
-    "gulp-jshint": "^1.5.1",
-    "jshint-stylish": "^0.1.5",
-    "compass-options": "^0.1.1",
-    "browser-sync": "^0.8.0",
-    "gulp-shell": "^0.2.4",
-    "walk": "^2.3.1",
-    "jsonfile": "^1.1.1",
-    "gulp-watch": "^0.5.4",
-    "gulp-plumber": "^0.6.1",
-    "chalk": "^0.4.0",
-    "event-stream": "^3.1.2",
-    "gulp-util": "^2.2.14",
-    "gulp-subtree": "^0.1.0",
-    "gulp-filter": "^0.4.1",
-    "gulp-load": "^0.1.1",
-    "require-dir": "^0.1.0",
-    "underscore.string": "^2.3.3",
-    "gulp-clean": "^0.2.4"
+    "gulp-uglify": "^0.2.1",
+    "gulp-concat": "^2.2.0"
   }
 }
