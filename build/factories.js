@@ -42,10 +42,10 @@
               title: 'Style Tile',
               href: '#/style-tile'
             });
-            menu.push({
-              title: 'Ish',
-              href: '#/ish'
-            });
+            // menu.push({
+            //   title: 'Ish',
+            //   href: '#/ish'
+            // });
             promise.resolve(menu);
           })
           .error(function (e) {
@@ -54,10 +54,10 @@
               title: 'Style Tile',
               href: '#/style-tile'
             });
-            menu.push({
-              title: 'Ish',
-              href: '#/ish'
-            });
+            // menu.push({
+            //   title: 'Ish',
+            //   href: '#/ish'
+            // });
             promise.resolve(menu);
           });
         return promise.promise;
