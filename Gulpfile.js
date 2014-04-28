@@ -8,7 +8,7 @@ gulp.task('compress', function () {
   gulp.src([
     'bower_components/angular/angular.js',
     'bower_components/angular-route/angular-route.js',
-    'bower_components/angular-local-storate/angular-local-storage.js',
+    'bower_components/angular-local-storage/angular-local-storage.js',
     'build/templates.js',
     'build/factories.js',
     'build/directives.js',
@@ -21,3 +21,5 @@ gulp.task('compress', function () {
   }))
   .pipe(gulp.dest('dist'));
 });
+
+gulp.task('default', ['compress']);
