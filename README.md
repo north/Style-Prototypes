@@ -24,4 +24,4 @@ Include the following before your closing `<body>` tag and before other JavaScri
 
 ## Customizing Prototype Styling
 
-Style Prototypes comes with a partial, `_prototype.scss`, that can be imported and used to custom style the prototype CSS. Or you can just write your own!
+Style Prototypes comes with a partial, `_style-prototype.scss`, that can be imported and used to custom style the prototype CSS. Or you can just write your own!
