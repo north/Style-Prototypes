@@ -1,10 +1,11 @@
 //////////////////////////////
 // Variables
 //////////////////////////////
-$StylePrototypeTwoColumnsMinWidth: 37.5em;
-$StylePrototypeBlack: #3c3c3c;
-$StylePrototypeFontStack: "HelveticaNeue", "Helvetica", "Arial", sans-serif;
-$StylePrototypeTransitionDuration: .2s;
+$StylePrototypeTwoColumnsMinWidth: 37.5em !default;
+$StylePrototypeBlack: #3c3c3c !default;
+$StylePrototypeFontStack: "HelveticaNeue", "Helvetica", "Arial", sans-serif !default;
+$StylePrototypeTransitionDuration: .2s !default;
+$StylePrototypeIconFont: true !default;
 
 //////////////////////////////
 // All Style Prototype Items
@@ -530,12 +531,14 @@ $StylePrototypeTransitionDuration: .2s;
 //////////////////////////////
 // Icon Fonts
 //////////////////////////////
-@include font-face('StylePrototypeIcons', (
-  'woff': 'sp/sp.woff'
-), $inline-woff: true);
+@if $StylePrototypeIconFont {
+  @include font-face('StylePrototypeIcons', (
+    'woff': 'sp/sp.woff'
+  ), $inline-woff: true);
 
-[data-sp-class="icon"] {
-  @if mixin-exists('icon-font') {
-    @include icon-font(('StylePrototypeIcons', $StylePrototypeFontStack), true);
+  [data-sp-class="icon"] {
+    @if mixin-exists('icon-font') {
+      @include icon-font(('StylePrototypeIcons', $StylePrototypeFontStack), true);
+    }
   }
 }
