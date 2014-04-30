@@ -5,13 +5,41 @@
 
   ]);
 
-  spDir.directive('navbar', function () {
-    return {
-      restrict: 'A',
-      replace: true,
-      template: '<nav ng-if="show" role="navigation" data-sp-class="navigation"><div menu="menu"></div><div data-sp-class="navigation--secondary"><div ng-if="ish" data-sp-class="ish"><form data-sp-class="ish--form" data-sp-id="ish--form">Size <input type="text" data-sp-class="ish--size-px" value="320">px</form><ul data-sp-class="ish--options"><li data-sp-class="ish--small"><a href="#" data-sp-class="ish--link" data-sp-id="ish--s">S</a></li><li data-sp-class="ish--small"><a href="#" data-sp-class="ish--link" data-sp-id="ish--m">M</a></li><li data-sp-class="ish--small"><a href="#" data-sp-class="ish--link" data-sp-id="ish--l">L</a></li><li data-sp-class="ish--large"><a href="#" data-sp-class="ish--link" data-sp-id="ish--full">Full</a></li><li data-sp-class="ish--large"><a href="#" data-sp-class="ish--link" data-sp-id="ish--random">Random</a></li><li data-sp-class="ish--large"><a href="#" data-sp-class="ish--link" data-sp-id="ish--disco">Disco</a></li><li data-sp-class="ish--large"><a href="#" data-sp-class="ish--link" data-sp-id="ish--hay">Hay</a></li></ul></div><input type="search" ng-model="StylePrototypeSearch.term" placeholder="Search" results="5" autosave="GlobalSearch" name="s" data-sp-class="navigation--search"></div></nav>'
-    };
-  });
+  spDir.directive('navbar', ['$location', function ($location) {
+      return {
+        restrict: 'A',
+        replace: true,
+        template: '<nav ng-if="show" role="navigation" data-sp-class="navigation"><div menu="menu"></div><div data-sp-class="navigation--secondary"><div data-sp-class="ish"><span data-sp-class="navigation--width" ng-if="!ish">Size<input type="text" data-sp-class="ish--size-px" value="320" disabled>px</span><form data-sp-class="ish--form" data-sp-id="ish--form" ng-if="ish">Size<input type="text" data-sp-class="ish--size-px" value="320">px</form><ul ng-if="ish" data-sp-class="ish--options"><li data-sp-class="ish--small"><a href="#" data-sp-class="ish--link" data-sp-id="ish--s">S</a></li><li data-sp-class="ish--small"><a href="#" data-sp-class="ish--link" data-sp-id="ish--m">M</a></li><li data-sp-class="ish--small"><a href="#" data-sp-class="ish--link" data-sp-id="ish--l">L</a></li><li data-sp-class="ish--large"><a href="#" data-sp-class="ish--link" data-sp-id="ish--full">Full</a></li><li data-sp-class="ish--large"><a href="#" data-sp-class="ish--link" data-sp-id="ish--random">Random</a></li><li data-sp-class="ish--large"><a href="#" data-sp-class="ish--link" data-sp-id="ish--disco">Disco</a></li><li data-sp-class="ish--large"><a href="#" data-sp-class="ish--link" data-sp-id="ish--hay">Hay</a></li></ul></div><input type="search" ng-model="StylePrototypeSearch.term" placeholder="Filter" data-sp-class="navigation--search"></div></nav>',
+        link: function () {
+          document.addEventListener('DOMContentLoaded', function () {
+            console.log($location);
+
+            var search = document.querySelector('[data-sp-class="navigation--search"]');
+
+            if ($location.$$path === '/pages' || $location.$$path === '/style-tile') {
+              search.setAttribute('disabled', 'disabled');
+            }
+            else {
+              search.removeAttribute('disabled');
+            }
+
+            var viewportIndicator = document.querySelector('[data-sp-class="navigation--width"] > input');
+            viewportIndicator.value = window.innerWidth;
+
+            window.addEventListener('resize', function () {
+              if (window.requestAnimationFrame) {
+                window.requestAnimationFrame(function () {
+                  viewportIndicator.value = window.innerWidth;
+                });
+              }
+              else {
+                viewportIndicator.value = window.innerWidth;
+              }
+            });
+          });
+        }
+      };
+    }]);
 
   spDir.directive('menu', function () {
     return {
