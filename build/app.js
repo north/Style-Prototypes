@@ -269,7 +269,7 @@
   // Style Tile Controller
   //////////////////////////////
   sp.controller('StyleTileCtrl', ['$scope', '$http', function ($scope, $http) {
-    $http.get('pages/style-tile.json')
+    $http.get('config/style-tile.json')
       .success(function (styleTile) {
         $scope.StylePrototypeStyleTile = styleTile;
       });
