@@ -3,6 +3,8 @@
 //////////////////////////////
 $StylePrototypeTwoColumnsMinWidth: 37.5em;
 $StylePrototypeBlack: #3c3c3c;
+$StylePrototypeFontStack: "HelveticaNeue", "Helvetica", "Arial", sans-serif;
+$StylePrototypeTransitionDuration: .2s;
 
 //////////////////////////////
 // All Style Prototype Items
@@ -144,7 +146,7 @@ $StylePrototypeBlack: #3c3c3c;
 // Section Headers
 //////////////////////////////
 [data-sp-class="section--header"] {
-  font-family: "HelveticaNeue", "Helvetica", "Arial", sans-serif;
+  font-family: $StylePrototypeFontStack;
   font-weight: normal;
   font-size: .7em;
   letter-spacing: .1em;
@@ -190,7 +192,7 @@ $StylePrototypeBlack: #3c3c3c;
   padding: 0;
   list-style: none;
   background: #222222;
-  font-family: "HelveticaNeue", "Helvetica", "Arial", sans-serif;
+  font-family: $StylePrototypeFontStack;
   font-weight: normal;
   position: absolute;
 
@@ -221,11 +223,11 @@ $StylePrototypeBlack: #3c3c3c;
   line-height: 1;
   padding: 1em;
   @if mixin-exists('transition') {
-    @include transition(color .15s ease-out);
+    @include transition(color $StylePrototypeTransitionDuration ease-out);
   }
   @else {
-    -webkit-transition: color .15s ease-out;
-            transition: color .15s ease-out;
+    -webkit-transition: color $StylePrototypeTransitionDuration ease-out;
+            transition: color $StylePrototypeTransitionDuration ease-out;
   }
 
 
@@ -271,11 +273,11 @@ $StylePrototypeBlack: #3c3c3c;
   max-height: 0;
   min-width: 10em;
   @if mixin-exists('transition') {
-    @include transition(max-height .1s ease-out);
+    @include transition(max-height $StylePrototypeTransitionDuration * 3 ease-in-out);
   }
   @else {
-    -webkit-transition: max-height .1s ease-out;
-            transition: max-height .1s ease-out;
+    -webkit-transition: max-height $StylePrototypeTransitionDuration * 3 ease-in-out;
+            transition: max-height $StylePrototypeTransitionDuration * 3 ease-in-out;
   }
 
   &[data-sp-state="active"] {
@@ -334,16 +336,18 @@ $StylePrototypeBlack: #3c3c3c;
 [data-sp-class="ish"] {
   display: inline-block;
   color: gray;
-  font-family: "HelveticaNeue", "Helvetica", "Arial", sans-serif;
+  font-family: $StylePrototypeFontStack;
   font-weight: normal;
 }
 
-[data-sp-class="ish--form"] {
+[data-sp-class="ish--form"],
+[data-sp-class="navigation--width"] {
   display: inline-block;
   font-weight: normal;
   font-size: .7em;
-  top: -1.25em;
+  // top: -1.25em;
   position: relative;
+  margin-right: .75em;
   text-transform: uppercase;
 }
 
@@ -363,11 +367,11 @@ $StylePrototypeBlack: #3c3c3c;
   border: none;
   padding: .1em;
   @if mixin-exists('transition') {
-    @include transition(all .2s ease-out);
+    @include transition(all $StylePrototypeTransitionDuration ease-out);
   }
   @else {
-    -webkit-transition: all .2s ease-out;
-            transition: all .2s ease-out;
+    -webkit-transition: all $StylePrototypeTransitionDuration ease-out;
+            transition: all $StylePrototypeTransitionDuration ease-out;
   }
 
   &:focus,
@@ -413,8 +417,20 @@ $StylePrototypeBlack: #3c3c3c;
   display: inline-block;
   position: relative;
 
+  @if mixin-exists('transition') {
+    @include transition(all $StylePrototypeTransitionDuration ease-out);
+  }
+  @else {
+    -webkit-transition: all $StylePrototypeTransitionDuration ease-out;
+            transition: all $StylePrototypeTransitionDuration ease-out;
+  }
+
+  &[disabled="disabled"] {
+    opacity: .15;
+  }
+
   [data-sp-class="ish"] ~ & {
-    top: -1.3em;
+    // top: -1.3em;
   }
   // width: 5.5em;
   // -webkit-transition: all .15s ease-in;
@@ -496,11 +512,11 @@ $StylePrototypeBlack: #3c3c3c;
   height: 100%;
   background: #999;
   @if mixin-exists('transition') {
-    @include transition(background .2s ease-out);
+    @include transition(background $StylePrototypeTransitionDuration ease-out);
   }
   @else {
-    -webkit-transition: background .2s ease-out;
-            transition: background .2s ease-out;
+    -webkit-transition: background $StylePrototypeTransitionDuration ease-out;
+            transition: background $StylePrototypeTransitionDuration ease-out;
   }
 
   &:hover {
@@ -508,5 +524,18 @@ $StylePrototypeBlack: #3c3c3c;
   }
   &:active {
     background: #444;
+  }
+}
+
+//////////////////////////////
+// Icon Fonts
+//////////////////////////////
+@include font-face('StylePrototypeIcons', (
+  'woff': 'sp/sp.woff'
+), $inline-woff: true);
+
+[data-sp-class="icon"] {
+  @if mixin-exists('icon-font') {
+    @include icon-font(('StylePrototypeIcons', $StylePrototypeFontStack), true);
   }
 }
