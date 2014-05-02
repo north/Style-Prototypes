@@ -1,0 +1,4 @@
+<div class="button--{{aspect}}" ng-repeat="(aspect, value) in components.buttons">
+  <h1>{{value.title}}</h1>
+  <p ng-if="aspect === 'warning'">This is a Warning Message</p>
+</div>

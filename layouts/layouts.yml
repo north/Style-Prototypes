@@ -1,6 +1,6 @@
 layouts:
   jumbotron:
-    image: http://www.fillmurray.com/300/200
+    image: http://www.fillmurray.com/300/300
     title: Cool Grey Murray
   aside_items:
     item-1:

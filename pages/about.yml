@@ -8,5 +8,5 @@ includes:
 overrides:
   layouts:
     jumbotron:
-      image: http://www.placecage.com/300/200
+      image: http://www.placecage.com/300/100
       title: Crazy Cage

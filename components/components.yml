@@ -1,3 +1,8 @@
 components:
-  - Hello World
-  - Goodbye World
+  buttons:
+    warning:
+      title: 'Warning'
+    error:
+      title: 'Error'
+    status:
+      title: 'Status'

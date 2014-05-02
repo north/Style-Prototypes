@@ -16,7 +16,8 @@
     "jquery": "~2.1.0",
     "angular-local-storage": "~0.0.1",
     "ish": "git@github.com:Snugug/ish.git",
-    "angular-route": "~1.2.16"
+    "angular-route": "~1.2.16",
+    "prism": "git://github.com/LeaVerou/prism.git#gh-pages"
   },
   "devDependencies": {
     "north": "~0.2.0"
