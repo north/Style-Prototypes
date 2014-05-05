@@ -152,8 +152,6 @@ $StylePrototypeTransitionDuration: .2s;
   letter-spacing: .1em;
   text-transform: uppercase;
 
-  border-bottom: 1px solid rgba($StylePrototypeBlack, .15);
-
   width: 100%;
   clear: both;
   margin: 2em 0;
@@ -537,5 +535,102 @@ $StylePrototypeTransitionDuration: .2s;
 [data-sp-class="icon"] {
   @if mixin-exists('icon-font') {
     @include icon-font(('StylePrototypeIcons', $StylePrototypeFontStack), true);
+  }
+}
+
+//////////////////////////////
+// Source View
+//////////////////////////////
+[data-sp-class="section--separator"] {
+  margin-top: .5em;
+  border-bottom: 1px solid rgba($StylePrototypeBlack, .15);
+}
+
+[data-sp-class="source--window"] {
+  font-size: (1 / .7) * 1em;
+  text-transform: none;
+}
+
+[data-sp-class="tab"] {
+  text-align: right;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  line-height: 2em;
+  position: relative;
+  margin-top: -1.5em;
+
+  &:after {
+    position: absolute;
+    content: '';
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    border-bottom: 1px solid rgba($StylePrototypeBlack, .15);
+    z-index: 1;
+  }
+
+  &:before {
+    z-index: 1;
+  }
+}
+
+[data-sp-class="tab--item"] {
+  margin: 0 -2px;
+  padding: 0 1.25em;
+  border: 1px solid rgba($StylePrototypeBlack, .15);
+  color: $StylePrototypeBlack;
+  background: mix(white, $StylePrototypeBlack, 95%);
+  display: inline-block;
+  position: relative;
+  z-index: 0;
+
+  border-top-left-radius: .375em;
+  border-top-right-radius: .375em;
+
+  text-transform: lowercase;
+
+  border-bottom: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:before:not(:first-of-type),
+  &:after:not(:last-of-type) {
+    position: absolute;
+    bottom: 0;
+    width: .375em;
+    height: .375em;
+    content: '';
+    border: 1px solid rgba($StylePrototypeBlack, .15);
+  }
+
+  &:before:not(:first-of-type) {
+    left: -.375em;
+    border-bottom-right-radius: .375em;
+    border-width: 0 1px 1px 0;
+    box-shadow: 2px 2px 0 mix(white, $StylePrototypeBlack, 95%);
+  }
+
+  &:after:not(:last-of-type) {
+    right: -.375em;
+    border-bottom-left-radius: .375em;
+    border-width: 0 0 1px 1px;
+    box-shadow: -2px 2px 0 mix(white, $StylePrototypeBlack, 95%);
+  }
+
+  &[data-state="selected"] {
+    z-index: 2;
+    border-bottom-color: white;
+    background: white;
+
+    &:before {
+      box-shadow: 2px 2px 0 white;
+    }
+
+    &:after {
+      box-shadow: -2px 2px 0 white;
+    }
   }
 }
