@@ -1,6 +1,12 @@
 (function (angular) {
   'use strict';
 
+  function dcl () {
+    var dcl = document.createEvent('Event');
+    dcl.initEvent('DOMContentLoaded', true, true);
+    window.document.dispatchEvent(dcl);
+  }
+
   function extend (target, source) {
     target = target || {};
     for (var prop in source) {
@@ -83,11 +89,17 @@
 
     $timeout(function () {
       if ('complete' === document.readyState) {
-        var dcl = document.createEvent('Event');
-        dcl.initEvent('DOMContentLoaded', true, true);
-        window.document.dispatchEvent(dcl);
+        dcl();
       }
     }, 1000);
+
+    $scope.$watch('StylePrototypeSearch.term', function () {
+      $timeout(function () {
+        if ('complete' === document.readyState) {
+          dcl();
+        }
+      }, 10);
+    });
 
 
     $rootScope.$on('$locationChangeStart', function (event, next, current) {
@@ -107,9 +119,7 @@
     $rootScope.$on('$routeChangeSuccess', function () {
       $timeout(function () {
         if ('complete' === document.readyState) {
-          var dcl = document.createEvent('Event');
-          dcl.initEvent('DOMContentLoaded', true, true);
-          window.document.dispatchEvent(dcl);
+          dcl();
         }
       }, 100);
     })
