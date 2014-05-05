@@ -13,7 +13,7 @@
         sass: '@sass',
         js: '@js'
       },
-      template: '<div data-sp-class="section--separator" ng-if="!(html || sass || js)"></div><div data-sp-class="source" ng-if="html || sass || js"><ul data-sp-class="tab"><li data-sp-class="tab--item" ng-if="html">HTML</li><li data-sp-class="tab--item" ng-if="sass">Sass</li><li data-sp-class="tab--item" ng-if="js">JS</li></ul><div data-sp-class="source--window"><pre><code class="language-markup"></code></pre></div></div>',
+      template: '<div data-sp-class="section--separator" ng-if="!(html || sass || js)"></div><div data-sp-class="source" ng-if="html || sass || js"><ul data-sp-class="tab"><li data-sp-class="tab--item" ng-if="html">HTML</li><li data-sp-class="tab--item" ng-if="sass">Sass</li><li data-sp-class="tab--item" ng-if="js">JS</li></ul><div data-sp-class="source--window"><pre data-sp-class="source--code"><code data-sp-class="source--code"></code></pre></div></div>',
       link: function (scope, elem, attr) {
         elem.ready(function () {
 
@@ -49,6 +49,9 @@
                   code.textContent = codeSource;
                   code.className = codeLang;
                   Prism.highlightElement(code);
+
+                  code.className = '';
+                  code.parentNode.className = '';
 
                   source.setAttribute('data-state', 'open');
                 }
