@@ -15,7 +15,6 @@
       },
       template: '<div data-sp-class="section--separator" ng-if="!(html || sass || js)"></div><div data-sp-class="source" ng-if="html || sass || js"><ul data-sp-class="tab"><li data-sp-class="tab--item" ng-if="html">HTML</li><li data-sp-class="tab--item" ng-if="sass">Sass</li><li data-sp-class="tab--item" ng-if="js">JS</li></ul><div data-sp-class="source--window"><pre><code class="language-markup"></code></pre></div></div>',
       link: function (scope, elem, attr) {
-        console.log(attr);
         elem.ready(function () {
 
           var links = elem.find('li');
@@ -26,10 +25,12 @@
               return;
             }
           });
-          var code = source.children[0].children[0];
+          var code = '';
+          if (source && source.children[0]) {
+            code = source.children[0].children[0];
+          }
 
           angular.forEach(links, function (v) {
-            // console.log(v.getAttribute('data-sp-class'));
             if (v.getAttribute('data-sp-class') === 'tab--item') {
               v.addEventListener('click', function () {
                 if (this.hasAttribute('data-state')) {
@@ -66,7 +67,6 @@
         template: '<nav ng-if="show" role="navigation" data-sp-class="navigation"><div menu="menu"></div><div data-sp-class="navigation--secondary"><div data-sp-class="ish"><span data-sp-class="navigation--width" ng-if="!ish">Size<input type="text" data-sp-class="ish--size-px" value="320" disabled>px</span><form data-sp-class="ish--form" data-sp-id="ish--form" ng-if="ish">Size<input type="text" data-sp-class="ish--size-px" value="320">px</form><ul ng-if="ish" data-sp-class="ish--options"><li data-sp-class="ish--small"><a href="#" data-sp-class="ish--link" data-sp-id="ish--s">S</a></li><li data-sp-class="ish--small"><a href="#" data-sp-class="ish--link" data-sp-id="ish--m">M</a></li><li data-sp-class="ish--small"><a href="#" data-sp-class="ish--link" data-sp-id="ish--l">L</a></li><li data-sp-class="ish--large"><a href="#" data-sp-class="ish--link" data-sp-id="ish--full">Full</a></li><li data-sp-class="ish--large"><a href="#" data-sp-class="ish--link" data-sp-id="ish--random">Random</a></li><li data-sp-class="ish--large"><a href="#" data-sp-class="ish--link" data-sp-id="ish--disco">Disco</a></li><li data-sp-class="ish--large"><a href="#" data-sp-class="ish--link" data-sp-id="ish--hay">Hay</a></li></ul></div><input type="search" ng-model="StylePrototypeSearch.term" placeholder="Filter" data-sp-class="navigation--search"></div></nav>',
         link: function () {
           document.addEventListener('DOMContentLoaded', function () {
-            console.log($location);
 
             var search = document.querySelector('[data-sp-class="navigation--search"]');
 

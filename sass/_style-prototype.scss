@@ -181,6 +181,11 @@ $StylePrototypeTransitionDuration: .2s;
   margin-bottom: 2em;
 }
 
+[data-sp-class="deeplink"] {
+  position: relative;
+  z-index: 5;
+}
+
 //////////////////////////////
 // Nav
 //////////////////////////////
@@ -541,6 +546,11 @@ $StylePrototypeTransitionDuration: .2s;
 //////////////////////////////
 // Source View
 //////////////////////////////
+[data-source] {
+  position: relative;
+  z-index: 1;
+}
+
 [data-sp-class="section--separator"] {
   margin-top: .5em;
   border-bottom: 1px solid rgba($StylePrototypeBlack, .15);
@@ -591,6 +601,14 @@ $StylePrototypeTransitionDuration: .2s;
   text-transform: lowercase;
 
   border-bottom: none;
+
+  @if mixin-exists('transition') {
+    @include transition(all $StylePrototypeTransitionDuration ease-in-out);
+  }
+  @else {
+    -webkit-transition: all $StylePrototypeTransitionDuration ease-in-out;
+            transition: all $StylePrototypeTransitionDuration ease-in-out;
+  }
 
   &:hover {
     cursor: pointer;
