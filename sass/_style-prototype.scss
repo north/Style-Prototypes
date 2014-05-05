@@ -634,3 +634,19 @@ $StylePrototypeTransitionDuration: .2s;
     }
   }
 }
+
+[data-sp-class="source--window"] {
+  max-height: 0em;
+  overflow: hidden;
+  @if mixin-exists('transition') {
+    @include transition(max-height $StylePrototypeTransitionDuration * 3 ease-in-out);
+  }
+  @else {
+    -webkit-transition: max-height $StylePrototypeTransitionDuration * 3 ease-in-out;
+            transition: max-height $StylePrototypeTransitionDuration * 3 ease-in-out;
+  }
+
+  &[data-state="open"] {
+    max-height: 120em;
+  }
+}
