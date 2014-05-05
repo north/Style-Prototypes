@@ -1,9 +1,26 @@
-(function (angular) {
+(function (angular, Prism) {
   'use strict';
 
   var spDir = angular.module('spDirectives', [
 
   ]);
+
+  spDir.directive('source', [function () {
+    return {
+      restrict: 'A',
+      scope: {
+        html: '@html',
+        sass: '@sass',
+        js: '@js'
+      },
+      template: '<div data-sp-class="section--separator" ng-if="!(html || sass || js)"></div><div data-sp-class="source" ng-if="html || sass || js"><ul data-sp-class="tab"><li data-sp-class="tab--item" ng-if="html">HTML</li><li data-sp-class="tab--item" ng-if="sass">Sass</li><li data-sp-class="tab--item" ng-if="js">JS</li></ul><div data-sp-class="source--window"><pre><code class="language-markup">{{html}}</code></pre></div></div>',
+      link: function (scope) {
+        document.addEventListener('DOMContentLoaded', function () {
+          Prism.highlightAll();
+        });
+      }
+    };
+  }]);
 
   spDir.directive('navbar', ['$location', function ($location) {
       return {
@@ -91,7 +108,7 @@
               activeNav[i].removeAttribute('data-sp-state');
             }
           }
-        }
+        };
 
         scope.openMenu = function () {
           if (element.attr('data-sp-state')) {
@@ -138,4 +155,4 @@
     };
   }]);
 
-})(window.angular);
+})(window.angular, window.Prism);

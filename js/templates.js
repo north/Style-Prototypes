@@ -11,7 +11,7 @@
         return '<div ng-repeat="(StylePrototypeSection, StylePrototypeItem) in StylePrototypeComponents"><h1 data-sp-class="section--header"><a href="#/{{StylePrototypeSection}}">{{StylePrototypeSection}}</a></h1><ul><li ng-repeat="StylePrototypeCmpt in StylePrototypeItem  | filter:StylePrototypeSearch.term | orderBy:\'id\'" data-sp-class="section--group"><h2 id="{{StylePrototypeCmpt.id}}" data-sp-class=\"section--header\"><a href="#/?id={{StylePrototypeCmpt.id}}">{{StylePrototypeCmpt.name}}</a></h2><span ng-include="StylePrototypeCmpt.path"></span></li></ul></div>';
       },
       components: function () {
-        return '<ul><li ng-repeat="StylePrototypeCmpt in StylePrototypeComponents | filter:StylePrototypeSearch.term | orderBy:\'id\'" data-sp-class="section--group"><h2 id="{{StylePrototypeCmpt.id}}" data-sp-class=\"section--header\"><a id="{{StylePrototypeCmpt.id}}" href="#/?id={{StylePrototypeCmpt.id}}" ng-click="updateId($event)">{{StylePrototypeCmpt.name}}</a></h2><span ng-include="StylePrototypeCmpt.path"></span></li></ul>';
+        return '<ul><li ng-repeat="StylePrototypeCmpt in StylePrototypeComponents | filter:StylePrototypeSearch.term | orderBy:\'id\'" data-sp-class="section--group"><h2 id="{{StylePrototypeCmpt.id}}" data-sp-class=\"section--header\"><a id="{{StylePrototypeCmpt.id}}" href="#/?id={{StylePrototypeCmpt.id}}" ng-click="updateId($event)">{{StylePrototypeCmpt.name}}</a><div data-source data-html="{{StylePrototypeCmpt.html}}"></div></h2><span ng-include="StylePrototypeCmpt.path"></span></li></ul>';
       },
       pages: function () {
         return '<span ng-repeat="StylePrototypeInclude in StylePrototypeIncludes" ng-include="StylePrototypeInclude"></span>';
