@@ -16,6 +16,7 @@
   "dependencies": {
     "angular": "~1.2.16",
     "angular-local-storage": "~0.0.1",
-    "angular-route": "~1.2.16"
+    "angular-route": "~1.2.16",
+    "prism": "git://github.com/LeaVerou/prism.git#gh-pages"
   }
 }
