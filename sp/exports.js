@@ -7,6 +7,8 @@ var chalk = require('chalk');
 var fs = require('fs');
 var path = require('path');
 var _s = require ('underscore.string');
+var StringDecoder = require('string_decoder').StringDecoder;
+var decoder = new StringDecoder('utf8');
 
 var dirTree = function (filename) {
   var name = path.basename(filename);
@@ -127,11 +129,14 @@ var folderwalk = function (options) {
       var fileId = fileRoot.split('/').splice(3).join('-') + '--' + fileName;
           fileId = fileId.indexOf('--') === 0 ? fileId.substr(2) : fileId;
 
+      var fileHTML = decoder.write(fs.readFileSync(root + '/' + stat.name));
+
       var file = {
         "name": fileName,
         "title": fileTitle,
         "id": fileId,
         "path": filePath,
+        "html": fileHTML,
         "group": fileRoot.split('/').splice(3).join('-')
       };
 
