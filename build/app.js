@@ -254,7 +254,7 @@
 
       $scope.StylePrototypeComponents = display;
 
-      console.log($routeParams.view);
+      // console.log($routeParams.view);
 
       $scope.updateId = function ($event) {
         $event.preventDefault();
@@ -267,7 +267,7 @@
         if (event.origin !== window.location.protocol + '//' + window.location.host) {
           return;
         }
-        console.log(event.data);
+        // console.log(event.data);
         $scope.$apply(function () {
           $scope.StylePrototypeSearch = event.data;
         });
