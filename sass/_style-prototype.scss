@@ -184,7 +184,18 @@ $StylePrototypeTransitionDuration: .2s;
 [data-sp-class="deeplink"] {
   position: relative;
   z-index: 5;
+
+  &:last-child {
+    padding-bottom: .5em;
+    width: 100%;
+    display: block;
+    padding-left: .5rem;
+    padding-right: .5rem;
+    font-weight: bold;
+    border-bottom: 1px solid rgba($StylePrototypeBlack, .25);
+  }
 }
+
 
 //////////////////////////////
 // Nav
