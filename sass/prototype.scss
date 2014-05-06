@@ -10,6 +10,12 @@ $browser-minimum-versions: (
   "ios-safari": "6.0-6.1",
   "android-chrome": "0"
 );
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
 @import "compass";
 @import "toolkit";
 @import "style-prototype";
