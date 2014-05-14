@@ -204,7 +204,7 @@
         });
 
         angular.forEach(display[0].overrides, function (v, k) {
-          $scope[k] = extend($scope[k], v);
+          $scope[k] = v;
         });
 
         $scope.StylePrototypeIncludes = display[0].includes;
