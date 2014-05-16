@@ -3,6 +3,7 @@
 var gulp = require('gulp');
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
+var shell = require('gulp-shell');
 
 gulp.task('compress', function () {
   gulp.src([
@@ -25,4 +26,11 @@ gulp.task('compress', function () {
   .pipe(gulp.dest('dist'));
 });
 
-gulp.task('default', ['compress']);
+gulp.task('compass', function () {
+  return gulp.src('sass/**/*')
+    .pipe(shell([
+      'bundle exec compass compile --force'
+    ]));
+});
+
+gulp.task('default', ['compress', 'compass']);
