@@ -176,7 +176,7 @@
   //////////////////////////////
   // Need Data Service
   //////////////////////////////
-  spDir.directive('component',['data', function (data) {
+  spDir.directive('pattern',['data', function (data) {
     return {
       scope: {
         name: '@name',
@@ -184,13 +184,13 @@
       },
       restrict: 'E',
       replace: true,
-      template: '<span ng-include="getComponentUrl()"></span>',
+      template: '<span ng-include="getPatternUrl()"></span>',
       link: function($scope, elem, attrs) {
-        data.get(attrs.source).then(function (components) {
-          $scope.getComponentUrl = function() {
-            for (var i in components) {
-              if (components[i].name === attrs.name) {
-                return components[i].path;
+        data.get(attrs.source).then(function (patterns) {
+          $scope.getPatternUrl = function() {
+            for (var i in patterns) {
+              if (patterns[i].name === attrs.name) {
+                return patterns[i].path;
               }
             }
           };
