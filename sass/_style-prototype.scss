@@ -237,11 +237,11 @@ $StylePrototypeTransitionDuration: .2s;
   line-height: 1;
   padding: 1em;
   @if mixin-exists('transition') {
-    @include transition(color $StylePrototypeTransitionDuration ease-out);
+    @include transition(color, $StylePrototypeTransitionDuration, ease-out, 0s);
   }
   @else {
-    -webkit-transition: color $StylePrototypeTransitionDuration ease-out;
-            transition: color $StylePrototypeTransitionDuration ease-out;
+    -webkit-transition: color $StylePrototypeTransitionDuration ease-out 0s;
+            transition: color $StylePrototypeTransitionDuration ease-out 0s;
   }
 
 
@@ -287,11 +287,11 @@ $StylePrototypeTransitionDuration: .2s;
   max-height: 0;
   min-width: 10em;
   @if mixin-exists('transition') {
-    @include transition(max-height $StylePrototypeTransitionDuration * 3 ease-in-out);
+    @include transition(max-height, $StylePrototypeTransitionDuration * 3, ease-in-out, 0s);
   }
   @else {
-    -webkit-transition: max-height $StylePrototypeTransitionDuration * 3 ease-in-out;
-            transition: max-height $StylePrototypeTransitionDuration * 3 ease-in-out;
+    -webkit-transition: max-height $StylePrototypeTransitionDuration * 3 ease-in-out 0s;
+            transition: max-height $StylePrototypeTransitionDuration * 3 ease-in-out 0s;
   }
 
   &[data-sp-state="active"] {
@@ -382,11 +382,11 @@ $StylePrototypeTransitionDuration: .2s;
   border: none;
   padding: .1em;
   @if mixin-exists('transition') {
-    @include transition(all $StylePrototypeTransitionDuration ease-out);
+    @include transition(all, $StylePrototypeTransitionDuration, ease-out, 0s);
   }
   @else {
-    -webkit-transition: all $StylePrototypeTransitionDuration ease-out;
-            transition: all $StylePrototypeTransitionDuration ease-out;
+    -webkit-transition: all $StylePrototypeTransitionDuration ease-out 0s;
+            transition: all $StylePrototypeTransitionDuration ease-out 0s;
   }
 
   &:focus,
@@ -433,11 +433,11 @@ $StylePrototypeTransitionDuration: .2s;
   position: relative;
 
   @if mixin-exists('transition') {
-    @include transition(all $StylePrototypeTransitionDuration ease-out);
+    @include transition(all, $StylePrototypeTransitionDuration, ease-out, 0s);
   }
   @else {
-    -webkit-transition: all $StylePrototypeTransitionDuration ease-out;
-            transition: all $StylePrototypeTransitionDuration ease-out;
+    -webkit-transition: all $StylePrototypeTransitionDuration ease-out 0s;
+            transition: all $StylePrototypeTransitionDuration ease-out 0s;
   }
 
   &[disabled="disabled"] {
@@ -527,11 +527,11 @@ $StylePrototypeTransitionDuration: .2s;
   height: 100%;
   background: #999;
   @if mixin-exists('transition') {
-    @include transition(background $StylePrototypeTransitionDuration ease-out);
+    @include transition(background, $StylePrototypeTransitionDuration, ease-out, 0s);
   }
   @else {
-    -webkit-transition: background $StylePrototypeTransitionDuration ease-out;
-            transition: background $StylePrototypeTransitionDuration ease-out;
+    -webkit-transition: background $StylePrototypeTransitionDuration ease-out 0s;
+            transition: background $StylePrototypeTransitionDuration ease-out 0s;
   }
 
   &:hover {
@@ -615,11 +615,11 @@ $StylePrototypeTransitionDuration: .2s;
   border-bottom: none;
 
   @if mixin-exists('transition') {
-    @include transition(all $StylePrototypeTransitionDuration ease-in-out);
+    @include transition(all,  $StylePrototypeTransitionDuration,  ease-in-out,  0s);
   }
   @else {
-    -webkit-transition: all $StylePrototypeTransitionDuration ease-in-out;
-            transition: all $StylePrototypeTransitionDuration ease-in-out;
+    -webkit-transition: all $StylePrototypeTransitionDuration ease-in-out 0s;
+            transition: all $StylePrototypeTransitionDuration ease-in-out 0s;
   }
 
   &:hover {
@@ -669,11 +669,11 @@ $StylePrototypeTransitionDuration: .2s;
   max-height: 0em;
   overflow: hidden;
   @if mixin-exists('transition') {
-    @include transition(max-height $StylePrototypeTransitionDuration * 3 ease-in-out);
+    @include transition(max-height, $StylePrototypeTransitionDuration * 3, ease-in-out, 0s);
   }
   @else {
-    -webkit-transition: max-height $StylePrototypeTransitionDuration * 3 ease-in-out;
-            transition: max-height $StylePrototypeTransitionDuration * 3 ease-in-out;
+    -webkit-transition: max-height $StylePrototypeTransitionDuration * 3 ease-in-out 0s;
+            transition: max-height $StylePrototypeTransitionDuration * 3 ease-in-out 0s;
   }
 
   &[data-state="open"] {
