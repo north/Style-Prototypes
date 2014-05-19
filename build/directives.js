@@ -187,13 +187,21 @@
       template: '<span ng-include="getPatternUrl()"></span>',
       link: function($scope, elem, attrs) {
         data.get(attrs.source).then(function (patterns) {
-          $scope.getPatternUrl = function() {
-            for (var i in patterns) {
-              if (patterns[i].name === attrs.name) {
-                return patterns[i].path;
+          data.scope().then(function (scope) {
+            if (scope) {
+              for (var i in scope) {
+                $scope[i] = scope[i];
               }
             }
-          };
+
+            $scope.getPatternUrl = function() {
+              for (var i in patterns) {
+                if (patterns[i].name === attrs.name) {
+                  return patterns[i].path;
+                }
+              }
+            };
+          });
         });
       }
     };

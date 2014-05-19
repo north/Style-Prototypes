@@ -132,18 +132,6 @@
     $scope.StylePrototypeSearch = GlobalSearch;
 
     //////////////////////////////
-    // Set Scope
-    //////////////////////////////
-    data.scope().then(function (scope) {
-      if (scope) {
-        for (var i in scope) {
-          $scope[i] = scope[i];
-        }
-      }
-      // console.log($scope);
-    });
-
-    //////////////////////////////
     // Set Components
     //////////////////////////////
     data.get().then(function (components) {
@@ -167,7 +155,19 @@
         delete comps.pages;
       }
 
-      $scope.StylePrototypeComponents = comps;
+      //////////////////////////////
+      // Set Scope
+      //////////////////////////////
+      data.scope().then(function (scope) {
+        console.log(scope);
+        if (scope) {
+          for (var i in scope) {
+            $scope[i] = scope[i];
+          }
+        }
+
+        $scope.StylePrototypeComponents = comps;
+      });
     });
   }]);
 
@@ -220,15 +220,6 @@
     $scope.StylePrototypeSearch = GlobalSearch;
 
     //////////////////////////////
-    // Set Scope
-    //////////////////////////////
-    data.scope($routeParams.view).then(function (scope) {
-      if (scope) {
-        $scope[$routeParams.view] = scope;
-      }
-    });
-
-    //////////////////////////////
     // Set Components
     //////////////////////////////
     data.get($routeParams.view).then(function (components) {
@@ -252,26 +243,26 @@
         display = components;
       }
 
-      $scope.StylePrototypeComponents = display;
-
-      // console.log($routeParams.view);
-
-      $scope.updateId = function ($event) {
-        $event.preventDefault();
-        var id = $event.srcElement.getAttribute('id');
-        $location.search('group', null);
-        $location.search('id', id);
-      };
-
-      window.addEventListener('message',function(event) {
-        if (event.origin !== window.location.protocol + '//' + window.location.host) {
-          return;
+      //////////////////////////////
+      // Set Scope
+      //////////////////////////////
+      data.scope().then(function (scope) {
+        if (scope) {
+          for (var i in scope) {
+            $scope[i] = scope[i];
+          }
         }
-        // console.log(event.data);
-        $scope.$apply(function () {
-          $scope.StylePrototypeSearch = event.data;
-        });
-      }, false);
+
+        $scope.updateId = function ($event) {
+          $event.preventDefault();
+          var id = $event.srcElement.getAttribute('id');
+          $location.search('group', null);
+          $location.search('id', id);
+        };
+      })
+      .then(function () {
+        $scope.StylePrototypeComponents = display;
+      });
     });
   }]);
 
