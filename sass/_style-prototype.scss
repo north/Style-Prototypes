@@ -317,6 +317,7 @@ $StylePrototypeTransitionDuration: .2s;
   height: 2.2em;
   margin-bottom: .75em;
   position: relative;
+  z-index: 10;
   @extend %sp-class-clearfix;
 
   > [data-sp-class="menu"] {
