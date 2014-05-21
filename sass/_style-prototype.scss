@@ -654,16 +654,22 @@ $StylePrototypeTransitionDuration: .2s;
 //////////////////////////////
 // Greybox
 //////////////////////////////
+@mixin SP-GREYBOX($percent: 0%) {
+  background: mix(white, $StylePrototypeBlack, 50% + $percent);
+  border: .25em solid mix(white, $StylePrototypeBlack, 15% + $percent);
+  &:before {
+    color: mix(white, $StylePrototypeBlack, 90% + $percent);
+  }
+}
+
 [data-sp-greybox~="on"] {
   min-height: 5em;
   min-width: 5em;
-  background: mix(white, $StylePrototypeBlack, 50%);
-  border: .25em solid mix(white, $StylePrototypeBlack, 15%);
   position: relative;
+  @include SP-GREYBOX();
 
   &:before {
     content: 'placeholder';
-    color: mix(white, $StylePrototypeBlack, 90%);
     font-family: 'Helvetical Neue', 'Helvetica';
     top: 50%;
     width: 100%;
@@ -676,18 +682,23 @@ $StylePrototypeTransitionDuration: .2s;
   &[data-sp-greybox~="variable"] {
     &:nth-of-type(2n) {
       min-height: 6em;
+      @include SP-GREYBOX(-5%);
     }
     &:nth-of-type(3n) {
       min-height: 8em;
+      @include SP-GREYBOX(-10%);
     }
     &:nth-of-type(5n) {
       min-height: 10em;
+      @include SP-GREYBOX(-15%);
     }
     &:nth-of-type(7n) {
       min-height: 12em;
+      @include SP-GREYBOX(5%);
     }
     &:nth-of-type(14n) {
       min-height: 3em;
+      @include SP-GREYBOX(10%);
     }
   }
 }
