@@ -650,3 +650,44 @@ $StylePrototypeTransitionDuration: .2s;
     max-height: 120em;
   }
 }
+
+//////////////////////////////
+// Greybox
+//////////////////////////////
+[data-sp-greybox~="on"] {
+  min-height: 5em;
+  min-width: 5em;
+  background: mix(white, $StylePrototypeBlack, 50%);
+  border: .25em solid mix(white, $StylePrototypeBlack, 15%);
+  position: relative;
+
+  &:before {
+    content: 'placeholder';
+    color: mix(white, $StylePrototypeBlack, 90%);
+    font-family: 'Helvetical Neue', 'Helvetica';
+    top: 50%;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+  }
+
+  &[data-sp-greybox~="variable"] {
+    &:nth-of-type(2n) {
+      min-height: 6em;
+    }
+    &:nth-of-type(3n) {
+      min-height: 8em;
+    }
+    &:nth-of-type(5n) {
+      min-height: 10em;
+    }
+    &:nth-of-type(7n) {
+      min-height: 12em;
+    }
+    &:nth-of-type(14n) {
+      min-height: 3em;
+    }
+  }
+}
