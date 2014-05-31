@@ -121,7 +121,7 @@
         if ('complete' === document.readyState) {
           dcl();
         }
-      }, 100);
+      }, 1000);
     })
   }]);
 
