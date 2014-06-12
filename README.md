@@ -2,6 +2,8 @@
 
 Bower package containing webapp brains and core styling for a Style Prototype.
 
+**NOTE:** For setting up a new Style Prototype generator, see [these instructions](https://github.com/north/generator-Style-Prototype#installation).
+
 ## Installation
 
 ```bash
