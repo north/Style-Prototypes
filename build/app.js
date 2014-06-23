@@ -61,6 +61,10 @@
       });
   }]);
 
+  //////////////////////////////
+  // Range filter for doing for loops
+  // From http://stackoverflow.com/questions/11873570/angularjs-for-loop-with-numbers-ranges
+  //////////////////////////////
   sp.filter('range', function () {
     return function (input, total) {
       total = parseInt(total);
@@ -130,10 +134,6 @@
   //////////////////////////////
   sp.controller('AllCtrl', ['$scope', '$routeParams', 'data', 'GlobalSearch', function ($scope, $routeParams, data, GlobalSearch) {
     $scope.StylePrototypeSearch = GlobalSearch;
-
-    $scope.range = function (n) {
-      return new Array(n);
-    };
 
     //////////////////////////////
     // Set Components
