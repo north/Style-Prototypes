@@ -131,6 +131,10 @@
   sp.controller('AllCtrl', ['$scope', '$routeParams', 'data', 'GlobalSearch', function ($scope, $routeParams, data, GlobalSearch) {
     $scope.StylePrototypeSearch = GlobalSearch;
 
+    $scope.range = function (n) {
+      return new Array(n);
+    };
+
     //////////////////////////////
     // Set Components
     //////////////////////////////
