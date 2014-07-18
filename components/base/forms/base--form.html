@@ -4,8 +4,11 @@
 
     <fieldset>
       <legend>You mainly use XYZ for:</legend>
-      <label><input type="radio" value="Business" checked="checked">Business</label>
-      <label></label><input type="radio" value="Personal use">Personal use</label>
+      <input id="core-radio-0" type="radio" value="Business" checked="checked">
+      <label for="core-radio-0">Business</label>
+
+      <input id="core-radio-1" type="radio" value="Personal use">
+      <label for="core-radio-1">Personal use</label>
     </fieldset>
 
     <label for="discover">How did you discover XYZ?</label>
@@ -19,16 +22,27 @@
 
     <fieldset>
       <legend>How often do you use XYZ?</legend>
-      <label><input type="radio" value="Every Day" checked="checked">Every Day</label>
-      <label><input type="radio" value="Once a Week">Once a Week</label>
-      <label><input type="radio" value="Less Than Once a Week">Less Than Once a Week</label>
+      <input id="core-radio-7" type="radio" value="Every Day" checked="checked">
+      <label for="core-radio-7">Every Day</label>
+
+      <input id="core-radio-2" type="radio" value="Once a Week">
+      <label for="core-radio-2">Once a Week</label>
+
+      <input id="core-radio-3" type="radio" value="Less Than Once a Week">
+      <label for="core-radio-3">Less Than Once a Week</label>
     </fieldset>
 
     <fieldset>
       <legend>How would you rate your experience with XYZ?</legend>
-      <label><input type="radio" value="Good">Good</label>
-      <label><input type="radio" value="Average">Average</label>
-      <label><input type="radio" value="Bad">Bad</label>
+
+      <input id="core-radio-4" type="radio" value="Good">
+      <label for="core-radio-4">Good</label>
+
+      <input id="core-radio-5" type="radio" value="Average">
+      <label for="core-radio-5">Average</label>
+
+      <input id="core-radio-6" type="radio" value="Bad">
+      <label for="core-radio-6">Bad</label>
     </fieldset>
 
     <label for="timeUsed">How long have you been using XYZ?</label>
@@ -62,14 +76,19 @@
 
   <fieldset>
     <legend><h3>Would You Like Us To Follow Up with You?</h3></legend>
-    <label><input type="checkbox">Yes, please contact me to discuss my needs</label>
-    <label><input type="checkbox">Subscribe to XYZ newsletter</label>
+    <input id="core-checkbox-0" type="checkbox">
+    <label for="core-checkbox-0">Yes, please contact me to discuss my needs</label>
+
+    <input id="core-checkbox-1" type="checkbox">
+    <label for="core-checkbox-1">Subscribe to XYZ newsletter</label>
+
     <label for="commments">Any additional comments?</label>
     <textarea name="comments" cols="30" rows="10"></textarea>
   </fieldset>
 
   <fieldset>
-    <label><input required type="checkbox">I agree to the <a href="#">terms and conditions</a></label>
+    <input id="core-checkbox-2" required type="checkbox">
+    <label for="core-checkbox-2">I agree to the <a href="#">terms and conditions</a></label>
     <input type="submit">
   </fieldset>
 
