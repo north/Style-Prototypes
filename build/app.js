@@ -40,10 +40,6 @@
         template: templates.all(),
         controller: 'AllCtrl'
       })
-      .when('/style-tile', {
-        template: templates.styletile(),
-        controller: 'StyleTileCtrl'
-      })
       .when('/ish', {
         template: templates.ish(),
         controller: 'IshCtrl'
@@ -298,16 +294,6 @@
         $scope.StylePrototypeComponents = display;
       });
     });
-  }]);
-
-  //////////////////////////////
-  // Style Tile Controller
-  //////////////////////////////
-  sp.controller('StyleTileCtrl', ['$scope', '$http', function ($scope, $http) {
-    $http.get('config/style-tile.json')
-      .success(function (styleTile) {
-        $scope.StylePrototypeStyleTile = styleTile;
-      });
   }]);
 
   //////////////////////////////

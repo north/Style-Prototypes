@@ -77,7 +77,7 @@
 
             var search = document.querySelector('[data-sp-class="navigation--search"]');
 
-            if ($location.$$path === '/pages' || $location.$$path === '/style-tile') {
+            if ($location.$$path === '/pages') {
               search.setAttribute('disabled', 'disabled');
             }
             else {

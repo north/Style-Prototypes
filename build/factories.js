@@ -38,10 +38,6 @@
               title: 'All',
               href: '#/'
             });
-            menu.push({
-              title: 'Style Tile',
-              href: '#/style-tile'
-            });
             // menu.push({
             //   title: 'Ish',
             //   href: '#/ish'
