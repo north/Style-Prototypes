@@ -167,7 +167,7 @@ $StylePrototypeTransitionDuration: .2s;
       display: inline-block;
       font-size: .15em;
       padding-left: .75em;
-      content: ' (link)';
+      content: ' (' attr(data-sp-name) ')';
     }
   }
 
