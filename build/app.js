@@ -183,7 +183,7 @@
     $scope.StylePrototypeSearch = GlobalSearch;
 
     //////////////////////////////
-    // Set Components
+    // Set Page
     //////////////////////////////
     data.get('pages').then(function (allPages) {
       var display = [];
@@ -199,6 +199,9 @@
         display = allPages;
       }
 
+      //////////////////////////////
+      // Load the Page
+      //////////////////////////////
       pages.get(display[0].path).then(function (page) {
         console.log(page);
         //////////////////////////////
@@ -214,7 +217,9 @@
           });
         });
 
-
+        //////////////////////////////
+        // Set Includes
+        //////////////////////////////
         data.get().then(function (components) {
           var includes = [];
 
