@@ -65,6 +65,21 @@
     };
   }]);
 
+  spFact.factory('pages', ['$http', '$q', function ($http, $q) {
+    return {
+      get: function (path) {
+        var promise = $q.defer();
+
+        $http.get(path)
+          .success(function (data) {
+            promise.resolve(data);
+          });
+
+        return promise.promise;
+      }
+    };
+  }]);
+
   spFact.factory('data', ['$http', '$q', 'localStorageService', function ($http, $q, ls) {
     var components = ls.get('components');
     var scopes = ls.get('scopes');
@@ -72,8 +87,13 @@
     return {
       get: function (view) {
         var promise = $q.defer();
+        var config = 'config/files.json';
 
-        $http.get('config/files.json')
+        if (view === 'pages') {
+          config = 'config/pages.json';
+        }
+
+        $http.get(config)
           .success(function (data) {
             ls.add('components', data);
 

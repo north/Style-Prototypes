@@ -178,40 +178,65 @@
   //////////////////////////////
   // Pages Controller
   //////////////////////////////
-  sp.controller('PagesCtrl', ['$scope', 'data', '$routeParams', '$location', 'GlobalSearch', function ($scope, data, $routeParams, $location, GlobalSearch) {
+  sp.controller('PagesCtrl', ['$scope', 'data', 'pages',  '$routeParams', '$location', 'GlobalSearch', function ($scope, data, pages, $routeParams, $location, GlobalSearch) {
 
     $scope.StylePrototypeSearch = GlobalSearch;
 
     //////////////////////////////
     // Set Components
     //////////////////////////////
-    data.get('pages').then(function (components) {
+    data.get('pages').then(function (allPages) {
       var display = [];
 
       if ($routeParams.id) {
-        for (var j in components) {
-          if (components[j].id === $routeParams.id) {
-            display.push(components[j]);
+        for (var j in allPages) {
+          if (allPages[j].id === $routeParams.id) {
+            display.push(allPages[j]);
           }
         }
       }
       else {
-        display = components;
+        display = allPages;
       }
 
-      //////////////////////////////
-      // Set Scope
-      //////////////////////////////
-      data.scope().then(function (scope) {
-        angular.forEach(scope, function (v, k) {
-          $scope[k] = v;
+      pages.get(display[0].path).then(function (page) {
+        console.log(page);
+        //////////////////////////////
+        // Set Scope
+        //////////////////////////////
+        data.scope().then(function (scope) {
+          angular.forEach(scope, function (v, k) {
+            $scope[k] = v;
+          });
+
+          angular.forEach(page.overrides, function (v, k) {
+            $scope[k] = v;
+          });
         });
 
-        angular.forEach(display[0].overrides, function (v, k) {
-          $scope[k] = v;
+
+        data.get().then(function (components) {
+          var includes = [];
+
+          page.includes.forEach(function (v) {
+            if (v.include) {
+              includes.push('demos/pages/' + v.include);
+            }
+            else {
+              var component = null;
+              if (components[v.source]) {
+                components[v.source].forEach(function (c) {
+                  if (c.name === v.name) {
+                    includes.push(c.path);
+                  }
+                });
+              }
+            }
+          });
+
+          $scope.StylePrototypeIncludes = includes;
         });
 
-        $scope.StylePrototypeIncludes = display[0].includes;
       });
     });
   }]);
