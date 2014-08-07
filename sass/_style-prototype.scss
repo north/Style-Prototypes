@@ -37,14 +37,14 @@ $StylePrototypeTransitionDuration: .2s;
 
 }
 
-[data-sp-class="__style-tile"] {
+[data-sp-class="_style-tile"] {
   @extend %sp-class-clearfix;
 }
 
 //////////////////////////////
 // Style Tile Content Area
 //////////////////////////////
-[data-sp-class="__style-tile--content"] {
+[data-sp-class="_style-tile--content"] {
   margin-bottom: .75em;
   @media (min-width: #{$StylePrototypeTwoColumnsMinWidth}) {
     width: 61.8%;
@@ -56,7 +56,7 @@ $StylePrototypeTransitionDuration: .2s;
 //////////////////////////////
 // Style Tile Abstracts
 //////////////////////////////
-[data-sp-class="__style-tile--abstracts"] {
+[data-sp-class="_style-tile--abstracts"] {
   margin-bottom: .75em;
   @media (min-width: #{$StylePrototypeTwoColumnsMinWidth}) {
     width: 38.2%;
